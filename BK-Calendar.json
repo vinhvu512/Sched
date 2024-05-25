@@ -1,0 +1,3122 @@
+{
+    "Week 1|Facility BK-DAn|Monday|Session 2-2|Room Type 3": [
+        [
+            "CO4029",
+            "L02"
+        ]
+    ],
+    "Week 1|Facility BK-DAn|Monday|Session 6-8|Room Type 3": [
+        [
+            "CO2017",
+            "L02"
+        ]
+    ],
+    "Week 1|Facility BK-DAn|Tuesday|Session 2-4|Room Type 5": [
+        [
+            "CO3093",
+            "L04"
+        ]
+    ],
+    "Week 1|Facility BK-DAn|Tuesday|Session 5-5|Room Type 3": [
+        [
+            "CO4041",
+            "L01"
+        ]
+    ],
+    "Week 1|Facility BK-DAn|Tuesday|Session 7-7|Room Type 3": [
+        [
+            "CO3091",
+            "L01"
+        ]
+    ],
+    "Week 1|Facility BK-DAn|Tuesday|Session 10-10|Room Type 3": [
+        [
+            "CO3091",
+            "L02"
+        ],
+        [
+            "CO3091",
+            "L03"
+        ]
+    ],
+    "Week 1|Facility BK-DAn|Wednesday|Session 4-6|Room Type 3": [
+        [
+            "CO2017",
+            "L03"
+        ]
+    ],
+    "Week 1|Facility BK-DAn|Wednesday|Session 5-7|Room Type 4": [
+        [
+            "CO2011",
+            "L05"
+        ]
+    ],
+    "Week 1|Facility BK-DAn|Wednesday|Session 6-6|Room Type 3": [
+        [
+            "CO4041",
+            "L02"
+        ]
+    ],
+    "Week 1|Facility BK-DAn|Wednesday|Session 8-10|Room Type 4": [
+        [
+            "CO2011",
+            "L06"
+        ]
+    ],
+    "Week 1|Facility BK-DAn|Thursday|Session 3-5|Room Type 4": [
+        [
+            "CO2011",
+            "L04"
+        ]
+    ],
+    "Week 1|Facility BK-DAn|Thursday|Session 5-7|Room Type 5": [
+        [
+            "CO2003",
+            "L04"
+        ]
+    ],
+    "Week 1|Facility BK-DAn|Thursday|Session 9-11|Room Type 4": [
+        [
+            "CO3001",
+            "L05"
+        ]
+    ],
+    "Week 1|Facility BK-DAn|Friday|Session 5-8|Room Type 3": [
+        [
+            "CO2013",
+            "L05"
+        ]
+    ],
+    "Week 1|Facility BK-DAn|Friday|Session 6-6|Room Type 3": [
+        [
+            "CO4029",
+            "L03"
+        ]
+    ],
+    "Week 1|Facility BK-DAn|Friday|Session 7-9|Room Type 4": [
+        [
+            "CO3001",
+            "L04"
+        ]
+    ],
+    "Week 1|Facility BK-DAn|Friday|Session 8-8|Room Type 3": [
+        [
+            "CO4029",
+            "L04"
+        ]
+    ],
+    "Week 1|Facility BK-DAn|Friday|Session 9-11|Room Type 5": [
+        [
+            "CO3093",
+            "L05"
+        ]
+    ],
+    "Week 1|Facility BK-DAn|Friday|Session 10-10|Room Type 3": [
+        [
+            "CO4029",
+            "L01"
+        ]
+    ],
+    "Week 1|Facility BK-LTK|Monday|Session 2-4|Room Type 3": [
+        [
+            "CO3093",
+            "CC03"
+        ]
+    ],
+    "Week 1|Facility BK-LTK|Monday|Session 3-3|Room Type 3": [
+        [
+            "CO4029",
+            "CN01"
+        ]
+    ],
+    "Week 1|Facility BK-LTK|Monday|Session 7-7|Room Type 3": [
+        [
+            "CO4041",
+            "CC01"
+        ]
+    ],
+    "Week 1|Facility BK-LTK|Monday|Session 11-11|Room Type 3": [
+        [
+            "CO4029",
+            "CC01"
+        ]
+    ],
+    "Week 1|Facility BK-LTK|Tuesday|Session 3-5|Room Type 3": [
+        [
+            "CO2003",
+            "CN02"
+        ]
+    ],
+    "Week 1|Facility BK-LTK|Tuesday|Session 5-7|Room Type 3": [
+        [
+            "CO3093",
+            "CC04"
+        ]
+    ],
+    "Week 1|Facility BK-LTK|Tuesday|Session 11-13|Room Type 3": [
+        [
+            "CO2003",
+            "CC05"
+        ]
+    ],
+    "Week 1|Facility BK-LTK|Wednesday|Session 2-4|Room Type 3": [
+        [
+            "CO1007",
+            "CC02"
+        ]
+    ],
+    "Week 1|Facility BK-LTK|Wednesday|Session 5-7|Room Type 3": [
+        [
+            "CO3001",
+            "CC03"
+        ]
+    ],
+    "Week 1|Facility BK-LTK|Wednesday|Session 7-9|Room Type 3": [
+        [
+            "CO2011",
+            "CC06"
+        ]
+    ],
+    "Week 1|Facility BK-LTK|Wednesday|Session 8-10|Room Type 3": [
+        [
+            "CO2011",
+            "CN02"
+        ]
+    ],
+    "Week 1|Facility BK-LTK|Thursday|Session 2-2|Room Type 3": [
+        [
+            "CO4029",
+            "CC02"
+        ]
+    ],
+    "Week 1|Facility BK-LTK|Friday|Session 2-2|Room Type 2": [
+        [
+            "CO3091",
+            "CC01"
+        ]
+    ],
+    "Week 1|Facility BK-LTK|Friday|Session 5-7|Room Type 3": [
+        [
+            "CO3001",
+            "CC04"
+        ]
+    ],
+    "Week 1|Facility BK-LTK|Friday|Session 7-9|Room Type 3": [
+        [
+            "CO2011",
+            "CC05"
+        ]
+    ],
+    "Week 2|Facility BK-DAn|Monday|Session 2-2|Room Type 3": [
+        [
+            "CO4029",
+            "L02"
+        ]
+    ],
+    "Week 2|Facility BK-DAn|Monday|Session 6-8|Room Type 3": [
+        [
+            "CO2017",
+            "L02"
+        ]
+    ],
+    "Week 2|Facility BK-DAn|Tuesday|Session 2-4|Room Type 5": [
+        [
+            "CO3093",
+            "L04"
+        ]
+    ],
+    "Week 2|Facility BK-DAn|Tuesday|Session 5-5|Room Type 3": [
+        [
+            "CO4041",
+            "L01"
+        ]
+    ],
+    "Week 2|Facility BK-DAn|Tuesday|Session 7-7|Room Type 3": [
+        [
+            "CO3091",
+            "L01"
+        ]
+    ],
+    "Week 2|Facility BK-DAn|Tuesday|Session 10-10|Room Type 3": [
+        [
+            "CO3091",
+            "L02"
+        ],
+        [
+            "CO3091",
+            "L03"
+        ]
+    ],
+    "Week 2|Facility BK-DAn|Wednesday|Session 4-6|Room Type 3": [
+        [
+            "CO2017",
+            "L03"
+        ]
+    ],
+    "Week 2|Facility BK-DAn|Wednesday|Session 5-7|Room Type 4": [
+        [
+            "CO2011",
+            "L05"
+        ]
+    ],
+    "Week 2|Facility BK-DAn|Wednesday|Session 6-6|Room Type 3": [
+        [
+            "CO4041",
+            "L02"
+        ]
+    ],
+    "Week 2|Facility BK-DAn|Wednesday|Session 8-10|Room Type 4": [
+        [
+            "CO2011",
+            "L06"
+        ]
+    ],
+    "Week 2|Facility BK-DAn|Thursday|Session 3-5|Room Type 4": [
+        [
+            "CO2011",
+            "L04"
+        ]
+    ],
+    "Week 2|Facility BK-DAn|Thursday|Session 5-7|Room Type 5": [
+        [
+            "CO2003",
+            "L04"
+        ]
+    ],
+    "Week 2|Facility BK-DAn|Thursday|Session 9-11|Room Type 4": [
+        [
+            "CO3001",
+            "L05"
+        ]
+    ],
+    "Week 2|Facility BK-DAn|Friday|Session 5-8|Room Type 3": [
+        [
+            "CO2013",
+            "L05"
+        ]
+    ],
+    "Week 2|Facility BK-DAn|Friday|Session 6-6|Room Type 3": [
+        [
+            "CO4029",
+            "L03"
+        ]
+    ],
+    "Week 2|Facility BK-DAn|Friday|Session 7-9|Room Type 4": [
+        [
+            "CO3001",
+            "L04"
+        ]
+    ],
+    "Week 2|Facility BK-DAn|Friday|Session 8-8|Room Type 3": [
+        [
+            "CO4029",
+            "L04"
+        ]
+    ],
+    "Week 2|Facility BK-DAn|Friday|Session 9-11|Room Type 5": [
+        [
+            "CO3093",
+            "L05"
+        ]
+    ],
+    "Week 2|Facility BK-DAn|Friday|Session 10-10|Room Type 3": [
+        [
+            "CO4029",
+            "L01"
+        ]
+    ],
+    "Week 2|Facility BK-LTK|Monday|Session 2-4|Room Type 3": [
+        [
+            "CO3093",
+            "CC03"
+        ]
+    ],
+    "Week 2|Facility BK-LTK|Monday|Session 3-3|Room Type 3": [
+        [
+            "CO4029",
+            "CN01"
+        ]
+    ],
+    "Week 2|Facility BK-LTK|Monday|Session 7-7|Room Type 3": [
+        [
+            "CO4041",
+            "CC01"
+        ]
+    ],
+    "Week 2|Facility BK-LTK|Monday|Session 11-11|Room Type 3": [
+        [
+            "CO4029",
+            "CC01"
+        ]
+    ],
+    "Week 2|Facility BK-LTK|Tuesday|Session 3-5|Room Type 3": [
+        [
+            "CO2003",
+            "CN02"
+        ]
+    ],
+    "Week 2|Facility BK-LTK|Tuesday|Session 5-7|Room Type 3": [
+        [
+            "CO3093",
+            "CC04"
+        ]
+    ],
+    "Week 2|Facility BK-LTK|Tuesday|Session 11-13|Room Type 3": [
+        [
+            "CO2003",
+            "CC05"
+        ]
+    ],
+    "Week 2|Facility BK-LTK|Wednesday|Session 2-4|Room Type 3": [
+        [
+            "CO1007",
+            "CC02"
+        ]
+    ],
+    "Week 2|Facility BK-LTK|Wednesday|Session 5-7|Room Type 3": [
+        [
+            "CO3001",
+            "CC03"
+        ]
+    ],
+    "Week 2|Facility BK-LTK|Wednesday|Session 7-9|Room Type 3": [
+        [
+            "CO2011",
+            "CC06"
+        ]
+    ],
+    "Week 2|Facility BK-LTK|Wednesday|Session 8-10|Room Type 3": [
+        [
+            "CO2011",
+            "CN02"
+        ]
+    ],
+    "Week 2|Facility BK-LTK|Thursday|Session 2-2|Room Type 3": [
+        [
+            "CO4029",
+            "CC02"
+        ]
+    ],
+    "Week 2|Facility BK-LTK|Friday|Session 2-2|Room Type 2": [
+        [
+            "CO3091",
+            "CC01"
+        ]
+    ],
+    "Week 2|Facility BK-LTK|Friday|Session 5-7|Room Type 3": [
+        [
+            "CO3001",
+            "CC04"
+        ]
+    ],
+    "Week 2|Facility BK-LTK|Friday|Session 7-9|Room Type 3": [
+        [
+            "CO2011",
+            "CC05"
+        ]
+    ],
+    "Week 3|Facility BK-DAn|Monday|Session 2-2|Room Type 3": [
+        [
+            "CO4029",
+            "L02"
+        ]
+    ],
+    "Week 3|Facility BK-DAn|Monday|Session 6-8|Room Type 3": [
+        [
+            "CO2017",
+            "L02"
+        ]
+    ],
+    "Week 3|Facility BK-DAn|Tuesday|Session 2-4|Room Type 5": [
+        [
+            "CO3093",
+            "L04"
+        ]
+    ],
+    "Week 3|Facility BK-DAn|Tuesday|Session 5-5|Room Type 3": [
+        [
+            "CO4041",
+            "L01"
+        ]
+    ],
+    "Week 3|Facility BK-DAn|Tuesday|Session 7-7|Room Type 3": [
+        [
+            "CO3091",
+            "L01"
+        ]
+    ],
+    "Week 3|Facility BK-DAn|Tuesday|Session 10-10|Room Type 3": [
+        [
+            "CO3091",
+            "L02"
+        ],
+        [
+            "CO3091",
+            "L03"
+        ]
+    ],
+    "Week 3|Facility BK-DAn|Wednesday|Session 4-6|Room Type 3": [
+        [
+            "CO2017",
+            "L03"
+        ]
+    ],
+    "Week 3|Facility BK-DAn|Wednesday|Session 5-7|Room Type 4": [
+        [
+            "CO2011",
+            "L05"
+        ]
+    ],
+    "Week 3|Facility BK-DAn|Wednesday|Session 6-6|Room Type 3": [
+        [
+            "CO4041",
+            "L02"
+        ]
+    ],
+    "Week 3|Facility BK-DAn|Wednesday|Session 8-10|Room Type 4": [
+        [
+            "CO2011",
+            "L06"
+        ]
+    ],
+    "Week 3|Facility BK-DAn|Thursday|Session 3-5|Room Type 4": [
+        [
+            "CO2011",
+            "L04"
+        ]
+    ],
+    "Week 3|Facility BK-DAn|Thursday|Session 5-7|Room Type 5": [
+        [
+            "CO2003",
+            "L04"
+        ]
+    ],
+    "Week 3|Facility BK-DAn|Thursday|Session 9-11|Room Type 4": [
+        [
+            "CO3001",
+            "L05"
+        ]
+    ],
+    "Week 3|Facility BK-DAn|Friday|Session 5-8|Room Type 3": [
+        [
+            "CO2013",
+            "L05"
+        ]
+    ],
+    "Week 3|Facility BK-DAn|Friday|Session 6-6|Room Type 3": [
+        [
+            "CO4029",
+            "L03"
+        ]
+    ],
+    "Week 3|Facility BK-DAn|Friday|Session 7-9|Room Type 4": [
+        [
+            "CO3001",
+            "L04"
+        ]
+    ],
+    "Week 3|Facility BK-DAn|Friday|Session 8-8|Room Type 3": [
+        [
+            "CO4029",
+            "L04"
+        ]
+    ],
+    "Week 3|Facility BK-DAn|Friday|Session 9-11|Room Type 5": [
+        [
+            "CO3093",
+            "L05"
+        ]
+    ],
+    "Week 3|Facility BK-DAn|Friday|Session 10-10|Room Type 3": [
+        [
+            "CO4029",
+            "L01"
+        ]
+    ],
+    "Week 3|Facility BK-LTK|Monday|Session 2-4|Room Type 3": [
+        [
+            "CO3093",
+            "CC03"
+        ]
+    ],
+    "Week 3|Facility BK-LTK|Monday|Session 3-3|Room Type 3": [
+        [
+            "CO4029",
+            "CN01"
+        ]
+    ],
+    "Week 3|Facility BK-LTK|Monday|Session 7-7|Room Type 3": [
+        [
+            "CO4041",
+            "CC01"
+        ]
+    ],
+    "Week 3|Facility BK-LTK|Monday|Session 11-11|Room Type 3": [
+        [
+            "CO4029",
+            "CC01"
+        ]
+    ],
+    "Week 3|Facility BK-LTK|Tuesday|Session 3-5|Room Type 3": [
+        [
+            "CO2003",
+            "CN02"
+        ]
+    ],
+    "Week 3|Facility BK-LTK|Tuesday|Session 5-7|Room Type 3": [
+        [
+            "CO3093",
+            "CC04"
+        ]
+    ],
+    "Week 3|Facility BK-LTK|Tuesday|Session 11-13|Room Type 3": [
+        [
+            "CO2003",
+            "CC05"
+        ]
+    ],
+    "Week 3|Facility BK-LTK|Wednesday|Session 2-4|Room Type 3": [
+        [
+            "CO1007",
+            "CC02"
+        ]
+    ],
+    "Week 3|Facility BK-LTK|Wednesday|Session 5-7|Room Type 3": [
+        [
+            "CO3001",
+            "CC03"
+        ]
+    ],
+    "Week 3|Facility BK-LTK|Wednesday|Session 7-9|Room Type 3": [
+        [
+            "CO2011",
+            "CC06"
+        ]
+    ],
+    "Week 3|Facility BK-LTK|Wednesday|Session 8-10|Room Type 3": [
+        [
+            "CO2011",
+            "CN02"
+        ]
+    ],
+    "Week 3|Facility BK-LTK|Thursday|Session 2-2|Room Type 3": [
+        [
+            "CO4029",
+            "CC02"
+        ]
+    ],
+    "Week 3|Facility BK-LTK|Friday|Session 2-2|Room Type 2": [
+        [
+            "CO3091",
+            "CC01"
+        ]
+    ],
+    "Week 3|Facility BK-LTK|Friday|Session 5-7|Room Type 3": [
+        [
+            "CO3001",
+            "CC04"
+        ]
+    ],
+    "Week 3|Facility BK-LTK|Friday|Session 7-9|Room Type 3": [
+        [
+            "CO2011",
+            "CC05"
+        ]
+    ],
+    "Week 4|Facility BK-DAn|Monday|Session 2-2|Room Type 3": [
+        [
+            "CO4029",
+            "L02"
+        ]
+    ],
+    "Week 4|Facility BK-DAn|Monday|Session 6-8|Room Type 3": [
+        [
+            "CO2017",
+            "L02"
+        ]
+    ],
+    "Week 4|Facility BK-DAn|Tuesday|Session 2-4|Room Type 5": [
+        [
+            "CO3093",
+            "L04"
+        ]
+    ],
+    "Week 4|Facility BK-DAn|Tuesday|Session 5-5|Room Type 3": [
+        [
+            "CO4041",
+            "L01"
+        ]
+    ],
+    "Week 4|Facility BK-DAn|Tuesday|Session 7-7|Room Type 3": [
+        [
+            "CO3091",
+            "L01"
+        ]
+    ],
+    "Week 4|Facility BK-DAn|Tuesday|Session 10-10|Room Type 3": [
+        [
+            "CO3091",
+            "L02"
+        ],
+        [
+            "CO3091",
+            "L03"
+        ]
+    ],
+    "Week 4|Facility BK-DAn|Wednesday|Session 4-6|Room Type 3": [
+        [
+            "CO2017",
+            "L03"
+        ]
+    ],
+    "Week 4|Facility BK-DAn|Wednesday|Session 5-7|Room Type 4": [
+        [
+            "CO2011",
+            "L05"
+        ]
+    ],
+    "Week 4|Facility BK-DAn|Wednesday|Session 6-6|Room Type 3": [
+        [
+            "CO4041",
+            "L02"
+        ]
+    ],
+    "Week 4|Facility BK-DAn|Wednesday|Session 8-10|Room Type 4": [
+        [
+            "CO2011",
+            "L06"
+        ]
+    ],
+    "Week 4|Facility BK-DAn|Thursday|Session 3-5|Room Type 4": [
+        [
+            "CO2011",
+            "L04"
+        ]
+    ],
+    "Week 4|Facility BK-DAn|Thursday|Session 5-7|Room Type 5": [
+        [
+            "CO2003",
+            "L04"
+        ]
+    ],
+    "Week 4|Facility BK-DAn|Thursday|Session 9-11|Room Type 4": [
+        [
+            "CO3001",
+            "L05"
+        ]
+    ],
+    "Week 4|Facility BK-DAn|Friday|Session 5-8|Room Type 3": [
+        [
+            "CO2013",
+            "L05"
+        ]
+    ],
+    "Week 4|Facility BK-DAn|Friday|Session 6-6|Room Type 3": [
+        [
+            "CO4029",
+            "L03"
+        ]
+    ],
+    "Week 4|Facility BK-DAn|Friday|Session 7-9|Room Type 4": [
+        [
+            "CO3001",
+            "L04"
+        ]
+    ],
+    "Week 4|Facility BK-DAn|Friday|Session 8-8|Room Type 3": [
+        [
+            "CO4029",
+            "L04"
+        ]
+    ],
+    "Week 4|Facility BK-DAn|Friday|Session 9-11|Room Type 5": [
+        [
+            "CO3093",
+            "L05"
+        ]
+    ],
+    "Week 4|Facility BK-DAn|Friday|Session 10-10|Room Type 3": [
+        [
+            "CO4029",
+            "L01"
+        ]
+    ],
+    "Week 4|Facility BK-LTK|Monday|Session 2-4|Room Type 3": [
+        [
+            "CO3093",
+            "CC03"
+        ]
+    ],
+    "Week 4|Facility BK-LTK|Monday|Session 3-3|Room Type 3": [
+        [
+            "CO4029",
+            "CN01"
+        ]
+    ],
+    "Week 4|Facility BK-LTK|Monday|Session 7-7|Room Type 3": [
+        [
+            "CO4041",
+            "CC01"
+        ]
+    ],
+    "Week 4|Facility BK-LTK|Monday|Session 11-11|Room Type 3": [
+        [
+            "CO4029",
+            "CC01"
+        ]
+    ],
+    "Week 4|Facility BK-LTK|Tuesday|Session 3-5|Room Type 3": [
+        [
+            "CO2003",
+            "CN02"
+        ]
+    ],
+    "Week 4|Facility BK-LTK|Tuesday|Session 5-7|Room Type 3": [
+        [
+            "CO3093",
+            "CC04"
+        ]
+    ],
+    "Week 4|Facility BK-LTK|Tuesday|Session 11-13|Room Type 3": [
+        [
+            "CO2003",
+            "CC05"
+        ]
+    ],
+    "Week 4|Facility BK-LTK|Wednesday|Session 2-4|Room Type 3": [
+        [
+            "CO1007",
+            "CC02"
+        ]
+    ],
+    "Week 4|Facility BK-LTK|Wednesday|Session 5-7|Room Type 3": [
+        [
+            "CO3001",
+            "CC03"
+        ]
+    ],
+    "Week 4|Facility BK-LTK|Wednesday|Session 7-9|Room Type 3": [
+        [
+            "CO2011",
+            "CC06"
+        ]
+    ],
+    "Week 4|Facility BK-LTK|Wednesday|Session 8-10|Room Type 3": [
+        [
+            "CO2011",
+            "CN02"
+        ]
+    ],
+    "Week 4|Facility BK-LTK|Thursday|Session 2-2|Room Type 3": [
+        [
+            "CO4029",
+            "CC02"
+        ]
+    ],
+    "Week 4|Facility BK-LTK|Friday|Session 2-2|Room Type 2": [
+        [
+            "CO3091",
+            "CC01"
+        ]
+    ],
+    "Week 4|Facility BK-LTK|Friday|Session 5-7|Room Type 3": [
+        [
+            "CO3001",
+            "CC04"
+        ]
+    ],
+    "Week 4|Facility BK-LTK|Friday|Session 7-9|Room Type 3": [
+        [
+            "CO2011",
+            "CC05"
+        ]
+    ],
+    "Week 5|Facility BK-DAn|Monday|Session 2-2|Room Type 3": [
+        [
+            "CO4029",
+            "L02"
+        ]
+    ],
+    "Week 5|Facility BK-DAn|Monday|Session 6-8|Room Type 3": [
+        [
+            "CO2017",
+            "L02"
+        ]
+    ],
+    "Week 5|Facility BK-DAn|Tuesday|Session 2-4|Room Type 5": [
+        [
+            "CO3093",
+            "L04"
+        ]
+    ],
+    "Week 5|Facility BK-DAn|Tuesday|Session 5-5|Room Type 3": [
+        [
+            "CO4041",
+            "L01"
+        ]
+    ],
+    "Week 5|Facility BK-DAn|Tuesday|Session 7-7|Room Type 3": [
+        [
+            "CO3091",
+            "L01"
+        ]
+    ],
+    "Week 5|Facility BK-DAn|Tuesday|Session 10-10|Room Type 3": [
+        [
+            "CO3091",
+            "L02"
+        ],
+        [
+            "CO3091",
+            "L03"
+        ]
+    ],
+    "Week 5|Facility BK-DAn|Wednesday|Session 4-6|Room Type 3": [
+        [
+            "CO2017",
+            "L03"
+        ]
+    ],
+    "Week 5|Facility BK-DAn|Wednesday|Session 5-7|Room Type 4": [
+        [
+            "CO2011",
+            "L05"
+        ]
+    ],
+    "Week 5|Facility BK-DAn|Wednesday|Session 6-6|Room Type 3": [
+        [
+            "CO4041",
+            "L02"
+        ]
+    ],
+    "Week 5|Facility BK-DAn|Wednesday|Session 8-10|Room Type 4": [
+        [
+            "CO2011",
+            "L06"
+        ]
+    ],
+    "Week 5|Facility BK-DAn|Thursday|Session 3-5|Room Type 4": [
+        [
+            "CO2011",
+            "L04"
+        ]
+    ],
+    "Week 5|Facility BK-DAn|Thursday|Session 5-7|Room Type 5": [
+        [
+            "CO2003",
+            "L04"
+        ]
+    ],
+    "Week 5|Facility BK-DAn|Thursday|Session 9-11|Room Type 4": [
+        [
+            "CO3001",
+            "L05"
+        ]
+    ],
+    "Week 5|Facility BK-DAn|Friday|Session 5-8|Room Type 3": [
+        [
+            "CO2013",
+            "L05"
+        ]
+    ],
+    "Week 5|Facility BK-DAn|Friday|Session 6-6|Room Type 3": [
+        [
+            "CO4029",
+            "L03"
+        ]
+    ],
+    "Week 5|Facility BK-DAn|Friday|Session 7-9|Room Type 4": [
+        [
+            "CO3001",
+            "L04"
+        ]
+    ],
+    "Week 5|Facility BK-DAn|Friday|Session 8-8|Room Type 3": [
+        [
+            "CO4029",
+            "L04"
+        ]
+    ],
+    "Week 5|Facility BK-DAn|Friday|Session 9-11|Room Type 5": [
+        [
+            "CO3093",
+            "L05"
+        ]
+    ],
+    "Week 5|Facility BK-DAn|Friday|Session 10-10|Room Type 3": [
+        [
+            "CO4029",
+            "L01"
+        ]
+    ],
+    "Week 5|Facility BK-LTK|Monday|Session 2-4|Room Type 3": [
+        [
+            "CO3093",
+            "CC03"
+        ]
+    ],
+    "Week 5|Facility BK-LTK|Monday|Session 3-3|Room Type 3": [
+        [
+            "CO4029",
+            "CN01"
+        ]
+    ],
+    "Week 5|Facility BK-LTK|Monday|Session 7-7|Room Type 3": [
+        [
+            "CO4041",
+            "CC01"
+        ]
+    ],
+    "Week 5|Facility BK-LTK|Monday|Session 11-11|Room Type 3": [
+        [
+            "CO4029",
+            "CC01"
+        ]
+    ],
+    "Week 5|Facility BK-LTK|Tuesday|Session 3-5|Room Type 3": [
+        [
+            "CO2003",
+            "CN02"
+        ]
+    ],
+    "Week 5|Facility BK-LTK|Tuesday|Session 5-7|Room Type 3": [
+        [
+            "CO3093",
+            "CC04"
+        ]
+    ],
+    "Week 5|Facility BK-LTK|Tuesday|Session 11-13|Room Type 3": [
+        [
+            "CO2003",
+            "CC05"
+        ]
+    ],
+    "Week 5|Facility BK-LTK|Wednesday|Session 2-4|Room Type 3": [
+        [
+            "CO1007",
+            "CC02"
+        ]
+    ],
+    "Week 5|Facility BK-LTK|Wednesday|Session 5-7|Room Type 3": [
+        [
+            "CO3001",
+            "CC03"
+        ]
+    ],
+    "Week 5|Facility BK-LTK|Wednesday|Session 7-9|Room Type 3": [
+        [
+            "CO2011",
+            "CC06"
+        ]
+    ],
+    "Week 5|Facility BK-LTK|Wednesday|Session 8-10|Room Type 3": [
+        [
+            "CO2011",
+            "CN02"
+        ]
+    ],
+    "Week 5|Facility BK-LTK|Thursday|Session 2-2|Room Type 3": [
+        [
+            "CO4029",
+            "CC02"
+        ]
+    ],
+    "Week 5|Facility BK-LTK|Friday|Session 2-2|Room Type 2": [
+        [
+            "CO3091",
+            "CC01"
+        ]
+    ],
+    "Week 5|Facility BK-LTK|Friday|Session 5-7|Room Type 3": [
+        [
+            "CO3001",
+            "CC04"
+        ]
+    ],
+    "Week 5|Facility BK-LTK|Friday|Session 7-9|Room Type 3": [
+        [
+            "CO2011",
+            "CC05"
+        ]
+    ],
+    "Week 6|Facility BK-DAn|Monday|Session 2-2|Room Type 3": [
+        [
+            "CO4029",
+            "L02"
+        ]
+    ],
+    "Week 6|Facility BK-DAn|Monday|Session 6-8|Room Type 3": [
+        [
+            "CO2017",
+            "L02"
+        ]
+    ],
+    "Week 6|Facility BK-DAn|Tuesday|Session 2-4|Room Type 5": [
+        [
+            "CO3093",
+            "L04"
+        ]
+    ],
+    "Week 6|Facility BK-DAn|Tuesday|Session 5-5|Room Type 3": [
+        [
+            "CO4041",
+            "L01"
+        ]
+    ],
+    "Week 6|Facility BK-DAn|Tuesday|Session 7-7|Room Type 3": [
+        [
+            "CO3091",
+            "L01"
+        ]
+    ],
+    "Week 6|Facility BK-DAn|Tuesday|Session 10-10|Room Type 3": [
+        [
+            "CO3091",
+            "L02"
+        ],
+        [
+            "CO3091",
+            "L03"
+        ]
+    ],
+    "Week 6|Facility BK-DAn|Wednesday|Session 4-6|Room Type 3": [
+        [
+            "CO2017",
+            "L03"
+        ]
+    ],
+    "Week 6|Facility BK-DAn|Wednesday|Session 5-7|Room Type 4": [
+        [
+            "CO2011",
+            "L05"
+        ]
+    ],
+    "Week 6|Facility BK-DAn|Wednesday|Session 6-6|Room Type 3": [
+        [
+            "CO4041",
+            "L02"
+        ]
+    ],
+    "Week 6|Facility BK-DAn|Wednesday|Session 8-10|Room Type 4": [
+        [
+            "CO2011",
+            "L06"
+        ]
+    ],
+    "Week 6|Facility BK-DAn|Thursday|Session 3-5|Room Type 4": [
+        [
+            "CO2011",
+            "L04"
+        ]
+    ],
+    "Week 6|Facility BK-DAn|Thursday|Session 5-7|Room Type 5": [
+        [
+            "CO2003",
+            "L04"
+        ]
+    ],
+    "Week 6|Facility BK-DAn|Thursday|Session 9-11|Room Type 4": [
+        [
+            "CO3001",
+            "L05"
+        ]
+    ],
+    "Week 6|Facility BK-DAn|Friday|Session 5-8|Room Type 3": [
+        [
+            "CO2013",
+            "L05"
+        ]
+    ],
+    "Week 6|Facility BK-DAn|Friday|Session 6-6|Room Type 3": [
+        [
+            "CO4029",
+            "L03"
+        ]
+    ],
+    "Week 6|Facility BK-DAn|Friday|Session 7-9|Room Type 4": [
+        [
+            "CO3001",
+            "L04"
+        ]
+    ],
+    "Week 6|Facility BK-DAn|Friday|Session 8-8|Room Type 3": [
+        [
+            "CO4029",
+            "L04"
+        ]
+    ],
+    "Week 6|Facility BK-DAn|Friday|Session 9-11|Room Type 5": [
+        [
+            "CO3093",
+            "L05"
+        ]
+    ],
+    "Week 6|Facility BK-DAn|Friday|Session 10-10|Room Type 3": [
+        [
+            "CO4029",
+            "L01"
+        ]
+    ],
+    "Week 6|Facility BK-LTK|Monday|Session 2-4|Room Type 3": [
+        [
+            "CO3093",
+            "CC03"
+        ]
+    ],
+    "Week 6|Facility BK-LTK|Monday|Session 3-3|Room Type 3": [
+        [
+            "CO4029",
+            "CN01"
+        ]
+    ],
+    "Week 6|Facility BK-LTK|Monday|Session 7-7|Room Type 3": [
+        [
+            "CO4041",
+            "CC01"
+        ]
+    ],
+    "Week 6|Facility BK-LTK|Monday|Session 11-11|Room Type 3": [
+        [
+            "CO4029",
+            "CC01"
+        ]
+    ],
+    "Week 6|Facility BK-LTK|Tuesday|Session 3-5|Room Type 3": [
+        [
+            "CO2003",
+            "CN02"
+        ]
+    ],
+    "Week 6|Facility BK-LTK|Tuesday|Session 5-7|Room Type 3": [
+        [
+            "CO3093",
+            "CC04"
+        ]
+    ],
+    "Week 6|Facility BK-LTK|Tuesday|Session 11-13|Room Type 3": [
+        [
+            "CO2003",
+            "CC05"
+        ]
+    ],
+    "Week 6|Facility BK-LTK|Wednesday|Session 2-4|Room Type 3": [
+        [
+            "CO1007",
+            "CC02"
+        ]
+    ],
+    "Week 6|Facility BK-LTK|Wednesday|Session 5-7|Room Type 3": [
+        [
+            "CO3001",
+            "CC03"
+        ]
+    ],
+    "Week 6|Facility BK-LTK|Wednesday|Session 7-9|Room Type 3": [
+        [
+            "CO2011",
+            "CC06"
+        ]
+    ],
+    "Week 6|Facility BK-LTK|Wednesday|Session 8-10|Room Type 3": [
+        [
+            "CO2011",
+            "CN02"
+        ]
+    ],
+    "Week 6|Facility BK-LTK|Thursday|Session 2-2|Room Type 3": [
+        [
+            "CO4029",
+            "CC02"
+        ]
+    ],
+    "Week 6|Facility BK-LTK|Friday|Session 2-2|Room Type 2": [
+        [
+            "CO3091",
+            "CC01"
+        ]
+    ],
+    "Week 6|Facility BK-LTK|Friday|Session 5-7|Room Type 3": [
+        [
+            "CO3001",
+            "CC04"
+        ]
+    ],
+    "Week 6|Facility BK-LTK|Friday|Session 7-9|Room Type 3": [
+        [
+            "CO2011",
+            "CC05"
+        ]
+    ],
+    "Week 7|Facility BK-DAn|Monday|Session 2-2|Room Type 3": [
+        [
+            "CO4029",
+            "L02"
+        ]
+    ],
+    "Week 7|Facility BK-DAn|Monday|Session 6-8|Room Type 3": [
+        [
+            "CO2017",
+            "L02"
+        ]
+    ],
+    "Week 7|Facility BK-DAn|Tuesday|Session 2-4|Room Type 5": [
+        [
+            "CO3093",
+            "L04"
+        ]
+    ],
+    "Week 7|Facility BK-DAn|Tuesday|Session 5-5|Room Type 3": [
+        [
+            "CO4041",
+            "L01"
+        ]
+    ],
+    "Week 7|Facility BK-DAn|Wednesday|Session 4-6|Room Type 3": [
+        [
+            "CO2017",
+            "L03"
+        ]
+    ],
+    "Week 7|Facility BK-DAn|Wednesday|Session 5-7|Room Type 4": [
+        [
+            "CO2011",
+            "L05"
+        ]
+    ],
+    "Week 7|Facility BK-DAn|Wednesday|Session 6-6|Room Type 3": [
+        [
+            "CO4041",
+            "L02"
+        ]
+    ],
+    "Week 7|Facility BK-DAn|Wednesday|Session 8-10|Room Type 4": [
+        [
+            "CO2011",
+            "L06"
+        ]
+    ],
+    "Week 7|Facility BK-DAn|Thursday|Session 3-5|Room Type 4": [
+        [
+            "CO2011",
+            "L04"
+        ]
+    ],
+    "Week 7|Facility BK-DAn|Thursday|Session 5-7|Room Type 5": [
+        [
+            "CO2003",
+            "L04"
+        ]
+    ],
+    "Week 7|Facility BK-DAn|Thursday|Session 9-11|Room Type 4": [
+        [
+            "CO3001",
+            "L05"
+        ]
+    ],
+    "Week 7|Facility BK-DAn|Friday|Session 6-6|Room Type 3": [
+        [
+            "CO4029",
+            "L03"
+        ]
+    ],
+    "Week 7|Facility BK-DAn|Friday|Session 7-9|Room Type 4": [
+        [
+            "CO3001",
+            "L04"
+        ]
+    ],
+    "Week 7|Facility BK-DAn|Friday|Session 8-8|Room Type 3": [
+        [
+            "CO4029",
+            "L04"
+        ]
+    ],
+    "Week 7|Facility BK-DAn|Friday|Session 9-11|Room Type 5": [
+        [
+            "CO3093",
+            "L05"
+        ]
+    ],
+    "Week 7|Facility BK-DAn|Friday|Session 10-10|Room Type 3": [
+        [
+            "CO4029",
+            "L01"
+        ]
+    ],
+    "Week 7|Facility BK-LTK|Monday|Session 2-4|Room Type 3": [
+        [
+            "CO3093",
+            "CC03"
+        ]
+    ],
+    "Week 7|Facility BK-LTK|Monday|Session 3-3|Room Type 3": [
+        [
+            "CO4029",
+            "CN01"
+        ]
+    ],
+    "Week 7|Facility BK-LTK|Monday|Session 7-7|Room Type 3": [
+        [
+            "CO4041",
+            "CC01"
+        ]
+    ],
+    "Week 7|Facility BK-LTK|Monday|Session 11-11|Room Type 3": [
+        [
+            "CO4029",
+            "CC01"
+        ]
+    ],
+    "Week 7|Facility BK-LTK|Tuesday|Session 3-5|Room Type 3": [
+        [
+            "CO2003",
+            "CN02"
+        ]
+    ],
+    "Week 7|Facility BK-LTK|Tuesday|Session 5-7|Room Type 3": [
+        [
+            "CO3093",
+            "CC04"
+        ]
+    ],
+    "Week 7|Facility BK-LTK|Tuesday|Session 11-13|Room Type 3": [
+        [
+            "CO2003",
+            "CC05"
+        ]
+    ],
+    "Week 7|Facility BK-LTK|Wednesday|Session 5-7|Room Type 3": [
+        [
+            "CO3001",
+            "CC03"
+        ]
+    ],
+    "Week 7|Facility BK-LTK|Wednesday|Session 7-9|Room Type 3": [
+        [
+            "CO2011",
+            "CC06"
+        ]
+    ],
+    "Week 7|Facility BK-LTK|Wednesday|Session 8-10|Room Type 3": [
+        [
+            "CO2011",
+            "CN02"
+        ]
+    ],
+    "Week 7|Facility BK-LTK|Thursday|Session 2-2|Room Type 3": [
+        [
+            "CO4029",
+            "CC02"
+        ]
+    ],
+    "Week 7|Facility BK-LTK|Friday|Session 5-7|Room Type 3": [
+        [
+            "CO3001",
+            "CC04"
+        ]
+    ],
+    "Week 7|Facility BK-LTK|Friday|Session 7-9|Room Type 3": [
+        [
+            "CO2011",
+            "CC05"
+        ]
+    ],
+    "Week 8|Facility BK-DAn|Tuesday|Session 7-7|Room Type 3": [
+        [
+            "CO3091",
+            "L01"
+        ]
+    ],
+    "Week 8|Facility BK-DAn|Tuesday|Session 10-10|Room Type 3": [
+        [
+            "CO3091",
+            "L02"
+        ],
+        [
+            "CO3091",
+            "L03"
+        ]
+    ],
+    "Week 8|Facility BK-DAn|Friday|Session 5-8|Room Type 3": [
+        [
+            "CO2013",
+            "L05"
+        ]
+    ],
+    "Week 8|Facility BK-LTK|Wednesday|Session 2-4|Room Type 3": [
+        [
+            "CO1007",
+            "CC02"
+        ]
+    ],
+    "Week 8|Facility BK-LTK|Friday|Session 2-2|Room Type 2": [
+        [
+            "CO3091",
+            "CC01"
+        ]
+    ],
+    "Week 9|Facility BK-DAn|Monday|Session 2-2|Room Type 3": [
+        [
+            "CO4029",
+            "L02"
+        ]
+    ],
+    "Week 9|Facility BK-DAn|Monday|Session 6-8|Room Type 3": [
+        [
+            "CO2017",
+            "L02"
+        ]
+    ],
+    "Week 9|Facility BK-DAn|Tuesday|Session 2-4|Room Type 5": [
+        [
+            "CO3093",
+            "L04"
+        ]
+    ],
+    "Week 9|Facility BK-DAn|Tuesday|Session 5-5|Room Type 3": [
+        [
+            "CO4041",
+            "L01"
+        ]
+    ],
+    "Week 9|Facility BK-DAn|Tuesday|Session 7-7|Room Type 3": [
+        [
+            "CO3091",
+            "L01"
+        ]
+    ],
+    "Week 9|Facility BK-DAn|Tuesday|Session 10-10|Room Type 3": [
+        [
+            "CO3091",
+            "L02"
+        ],
+        [
+            "CO3091",
+            "L03"
+        ]
+    ],
+    "Week 9|Facility BK-DAn|Wednesday|Session 4-6|Room Type 3": [
+        [
+            "CO2017",
+            "L03"
+        ]
+    ],
+    "Week 9|Facility BK-DAn|Wednesday|Session 5-7|Room Type 4": [
+        [
+            "CO2011",
+            "L05"
+        ]
+    ],
+    "Week 9|Facility BK-DAn|Wednesday|Session 6-6|Room Type 3": [
+        [
+            "CO4041",
+            "L02"
+        ]
+    ],
+    "Week 9|Facility BK-DAn|Wednesday|Session 8-10|Room Type 4": [
+        [
+            "CO2011",
+            "L06"
+        ]
+    ],
+    "Week 9|Facility BK-DAn|Thursday|Session 3-5|Room Type 4": [
+        [
+            "CO2011",
+            "L04"
+        ]
+    ],
+    "Week 9|Facility BK-DAn|Thursday|Session 5-7|Room Type 5": [
+        [
+            "CO2003",
+            "L04"
+        ]
+    ],
+    "Week 9|Facility BK-DAn|Thursday|Session 9-11|Room Type 4": [
+        [
+            "CO3001",
+            "L05"
+        ]
+    ],
+    "Week 9|Facility BK-DAn|Friday|Session 5-8|Room Type 3": [
+        [
+            "CO2013",
+            "L05"
+        ]
+    ],
+    "Week 9|Facility BK-DAn|Friday|Session 6-6|Room Type 3": [
+        [
+            "CO4029",
+            "L03"
+        ]
+    ],
+    "Week 9|Facility BK-DAn|Friday|Session 7-9|Room Type 4": [
+        [
+            "CO3001",
+            "L04"
+        ]
+    ],
+    "Week 9|Facility BK-DAn|Friday|Session 8-8|Room Type 3": [
+        [
+            "CO4029",
+            "L04"
+        ]
+    ],
+    "Week 9|Facility BK-DAn|Friday|Session 9-11|Room Type 5": [
+        [
+            "CO3093",
+            "L05"
+        ]
+    ],
+    "Week 9|Facility BK-DAn|Friday|Session 10-10|Room Type 3": [
+        [
+            "CO4029",
+            "L01"
+        ]
+    ],
+    "Week 9|Facility BK-LTK|Monday|Session 2-4|Room Type 3": [
+        [
+            "CO3093",
+            "CC03"
+        ]
+    ],
+    "Week 9|Facility BK-LTK|Monday|Session 3-3|Room Type 3": [
+        [
+            "CO4029",
+            "CN01"
+        ]
+    ],
+    "Week 9|Facility BK-LTK|Monday|Session 7-7|Room Type 3": [
+        [
+            "CO4041",
+            "CC01"
+        ]
+    ],
+    "Week 9|Facility BK-LTK|Monday|Session 11-11|Room Type 3": [
+        [
+            "CO4029",
+            "CC01"
+        ]
+    ],
+    "Week 9|Facility BK-LTK|Tuesday|Session 3-5|Room Type 3": [
+        [
+            "CO2003",
+            "CN02"
+        ]
+    ],
+    "Week 9|Facility BK-LTK|Tuesday|Session 5-7|Room Type 3": [
+        [
+            "CO3093",
+            "CC04"
+        ]
+    ],
+    "Week 9|Facility BK-LTK|Tuesday|Session 11-13|Room Type 3": [
+        [
+            "CO2003",
+            "CC05"
+        ]
+    ],
+    "Week 9|Facility BK-LTK|Wednesday|Session 2-4|Room Type 3": [
+        [
+            "CO1007",
+            "CC02"
+        ]
+    ],
+    "Week 9|Facility BK-LTK|Wednesday|Session 5-7|Room Type 3": [
+        [
+            "CO3001",
+            "CC03"
+        ]
+    ],
+    "Week 9|Facility BK-LTK|Wednesday|Session 7-9|Room Type 3": [
+        [
+            "CO2011",
+            "CC06"
+        ]
+    ],
+    "Week 9|Facility BK-LTK|Wednesday|Session 8-10|Room Type 3": [
+        [
+            "CO2011",
+            "CN02"
+        ]
+    ],
+    "Week 9|Facility BK-LTK|Thursday|Session 2-2|Room Type 3": [
+        [
+            "CO4029",
+            "CC02"
+        ]
+    ],
+    "Week 9|Facility BK-LTK|Friday|Session 2-2|Room Type 2": [
+        [
+            "CO3091",
+            "CC01"
+        ]
+    ],
+    "Week 9|Facility BK-LTK|Friday|Session 5-7|Room Type 3": [
+        [
+            "CO3001",
+            "CC04"
+        ]
+    ],
+    "Week 9|Facility BK-LTK|Friday|Session 7-9|Room Type 3": [
+        [
+            "CO2011",
+            "CC05"
+        ]
+    ],
+    "Week 10|Facility BK-DAn|Monday|Session 2-2|Room Type 3": [
+        [
+            "CO4029",
+            "L02"
+        ]
+    ],
+    "Week 10|Facility BK-DAn|Monday|Session 6-8|Room Type 3": [
+        [
+            "CO2017",
+            "L02"
+        ]
+    ],
+    "Week 10|Facility BK-DAn|Tuesday|Session 2-4|Room Type 5": [
+        [
+            "CO3093",
+            "L04"
+        ]
+    ],
+    "Week 10|Facility BK-DAn|Tuesday|Session 5-5|Room Type 3": [
+        [
+            "CO4041",
+            "L01"
+        ]
+    ],
+    "Week 10|Facility BK-DAn|Tuesday|Session 7-7|Room Type 3": [
+        [
+            "CO3091",
+            "L01"
+        ]
+    ],
+    "Week 10|Facility BK-DAn|Tuesday|Session 10-10|Room Type 3": [
+        [
+            "CO3091",
+            "L02"
+        ],
+        [
+            "CO3091",
+            "L03"
+        ]
+    ],
+    "Week 10|Facility BK-DAn|Wednesday|Session 4-6|Room Type 3": [
+        [
+            "CO2017",
+            "L03"
+        ]
+    ],
+    "Week 10|Facility BK-DAn|Wednesday|Session 5-7|Room Type 4": [
+        [
+            "CO2011",
+            "L05"
+        ]
+    ],
+    "Week 10|Facility BK-DAn|Wednesday|Session 6-6|Room Type 3": [
+        [
+            "CO4041",
+            "L02"
+        ]
+    ],
+    "Week 10|Facility BK-DAn|Wednesday|Session 8-10|Room Type 4": [
+        [
+            "CO2011",
+            "L06"
+        ]
+    ],
+    "Week 10|Facility BK-DAn|Thursday|Session 3-5|Room Type 4": [
+        [
+            "CO2011",
+            "L04"
+        ]
+    ],
+    "Week 10|Facility BK-DAn|Thursday|Session 5-7|Room Type 5": [
+        [
+            "CO2003",
+            "L04"
+        ]
+    ],
+    "Week 10|Facility BK-DAn|Thursday|Session 9-11|Room Type 4": [
+        [
+            "CO3001",
+            "L05"
+        ]
+    ],
+    "Week 10|Facility BK-DAn|Friday|Session 5-8|Room Type 3": [
+        [
+            "CO2013",
+            "L05"
+        ]
+    ],
+    "Week 10|Facility BK-DAn|Friday|Session 6-6|Room Type 3": [
+        [
+            "CO4029",
+            "L03"
+        ]
+    ],
+    "Week 10|Facility BK-DAn|Friday|Session 7-9|Room Type 4": [
+        [
+            "CO3001",
+            "L04"
+        ]
+    ],
+    "Week 10|Facility BK-DAn|Friday|Session 8-8|Room Type 3": [
+        [
+            "CO4029",
+            "L04"
+        ]
+    ],
+    "Week 10|Facility BK-DAn|Friday|Session 9-11|Room Type 5": [
+        [
+            "CO3093",
+            "L05"
+        ]
+    ],
+    "Week 10|Facility BK-DAn|Friday|Session 10-10|Room Type 3": [
+        [
+            "CO4029",
+            "L01"
+        ]
+    ],
+    "Week 10|Facility BK-LTK|Monday|Session 2-4|Room Type 3": [
+        [
+            "CO3093",
+            "CC03"
+        ]
+    ],
+    "Week 10|Facility BK-LTK|Monday|Session 3-3|Room Type 3": [
+        [
+            "CO4029",
+            "CN01"
+        ]
+    ],
+    "Week 10|Facility BK-LTK|Monday|Session 7-7|Room Type 3": [
+        [
+            "CO4041",
+            "CC01"
+        ]
+    ],
+    "Week 10|Facility BK-LTK|Monday|Session 11-11|Room Type 3": [
+        [
+            "CO4029",
+            "CC01"
+        ]
+    ],
+    "Week 10|Facility BK-LTK|Tuesday|Session 3-5|Room Type 3": [
+        [
+            "CO2003",
+            "CN02"
+        ]
+    ],
+    "Week 10|Facility BK-LTK|Tuesday|Session 5-7|Room Type 3": [
+        [
+            "CO3093",
+            "CC04"
+        ]
+    ],
+    "Week 10|Facility BK-LTK|Tuesday|Session 11-13|Room Type 3": [
+        [
+            "CO2003",
+            "CC05"
+        ]
+    ],
+    "Week 10|Facility BK-LTK|Wednesday|Session 2-4|Room Type 3": [
+        [
+            "CO1007",
+            "CC02"
+        ]
+    ],
+    "Week 10|Facility BK-LTK|Wednesday|Session 5-7|Room Type 3": [
+        [
+            "CO3001",
+            "CC03"
+        ]
+    ],
+    "Week 10|Facility BK-LTK|Wednesday|Session 7-9|Room Type 3": [
+        [
+            "CO2011",
+            "CC06"
+        ]
+    ],
+    "Week 10|Facility BK-LTK|Wednesday|Session 8-10|Room Type 3": [
+        [
+            "CO2011",
+            "CN02"
+        ]
+    ],
+    "Week 10|Facility BK-LTK|Thursday|Session 2-2|Room Type 3": [
+        [
+            "CO4029",
+            "CC02"
+        ]
+    ],
+    "Week 10|Facility BK-LTK|Friday|Session 2-2|Room Type 2": [
+        [
+            "CO3091",
+            "CC01"
+        ]
+    ],
+    "Week 10|Facility BK-LTK|Friday|Session 5-7|Room Type 3": [
+        [
+            "CO3001",
+            "CC04"
+        ]
+    ],
+    "Week 10|Facility BK-LTK|Friday|Session 7-9|Room Type 3": [
+        [
+            "CO2011",
+            "CC05"
+        ]
+    ],
+    "Week 11|Facility BK-DAn|Monday|Session 2-2|Room Type 3": [
+        [
+            "CO4029",
+            "L02"
+        ]
+    ],
+    "Week 11|Facility BK-DAn|Monday|Session 6-8|Room Type 3": [
+        [
+            "CO2017",
+            "L02"
+        ]
+    ],
+    "Week 11|Facility BK-DAn|Tuesday|Session 2-4|Room Type 5": [
+        [
+            "CO3093",
+            "L04"
+        ]
+    ],
+    "Week 11|Facility BK-DAn|Tuesday|Session 5-5|Room Type 3": [
+        [
+            "CO4041",
+            "L01"
+        ]
+    ],
+    "Week 11|Facility BK-DAn|Tuesday|Session 7-7|Room Type 3": [
+        [
+            "CO3091",
+            "L01"
+        ]
+    ],
+    "Week 11|Facility BK-DAn|Tuesday|Session 10-10|Room Type 3": [
+        [
+            "CO3091",
+            "L02"
+        ],
+        [
+            "CO3091",
+            "L03"
+        ]
+    ],
+    "Week 11|Facility BK-DAn|Wednesday|Session 4-6|Room Type 3": [
+        [
+            "CO2017",
+            "L03"
+        ]
+    ],
+    "Week 11|Facility BK-DAn|Wednesday|Session 5-7|Room Type 4": [
+        [
+            "CO2011",
+            "L05"
+        ]
+    ],
+    "Week 11|Facility BK-DAn|Wednesday|Session 6-6|Room Type 3": [
+        [
+            "CO4041",
+            "L02"
+        ]
+    ],
+    "Week 11|Facility BK-DAn|Wednesday|Session 8-10|Room Type 4": [
+        [
+            "CO2011",
+            "L06"
+        ]
+    ],
+    "Week 11|Facility BK-DAn|Thursday|Session 3-5|Room Type 4": [
+        [
+            "CO2011",
+            "L04"
+        ]
+    ],
+    "Week 11|Facility BK-DAn|Thursday|Session 5-7|Room Type 5": [
+        [
+            "CO2003",
+            "L04"
+        ]
+    ],
+    "Week 11|Facility BK-DAn|Thursday|Session 9-11|Room Type 4": [
+        [
+            "CO3001",
+            "L05"
+        ]
+    ],
+    "Week 11|Facility BK-DAn|Friday|Session 5-8|Room Type 3": [
+        [
+            "CO2013",
+            "L05"
+        ]
+    ],
+    "Week 11|Facility BK-DAn|Friday|Session 6-6|Room Type 3": [
+        [
+            "CO4029",
+            "L03"
+        ]
+    ],
+    "Week 11|Facility BK-DAn|Friday|Session 7-9|Room Type 4": [
+        [
+            "CO3001",
+            "L04"
+        ]
+    ],
+    "Week 11|Facility BK-DAn|Friday|Session 8-8|Room Type 3": [
+        [
+            "CO4029",
+            "L04"
+        ]
+    ],
+    "Week 11|Facility BK-DAn|Friday|Session 9-11|Room Type 5": [
+        [
+            "CO3093",
+            "L05"
+        ]
+    ],
+    "Week 11|Facility BK-DAn|Friday|Session 10-10|Room Type 3": [
+        [
+            "CO4029",
+            "L01"
+        ]
+    ],
+    "Week 11|Facility BK-LTK|Monday|Session 2-4|Room Type 3": [
+        [
+            "CO3093",
+            "CC03"
+        ]
+    ],
+    "Week 11|Facility BK-LTK|Monday|Session 3-3|Room Type 3": [
+        [
+            "CO4029",
+            "CN01"
+        ]
+    ],
+    "Week 11|Facility BK-LTK|Monday|Session 7-7|Room Type 3": [
+        [
+            "CO4041",
+            "CC01"
+        ]
+    ],
+    "Week 11|Facility BK-LTK|Monday|Session 11-11|Room Type 3": [
+        [
+            "CO4029",
+            "CC01"
+        ]
+    ],
+    "Week 11|Facility BK-LTK|Tuesday|Session 3-5|Room Type 3": [
+        [
+            "CO2003",
+            "CN02"
+        ]
+    ],
+    "Week 11|Facility BK-LTK|Tuesday|Session 5-7|Room Type 3": [
+        [
+            "CO3093",
+            "CC04"
+        ]
+    ],
+    "Week 11|Facility BK-LTK|Tuesday|Session 11-13|Room Type 3": [
+        [
+            "CO2003",
+            "CC05"
+        ]
+    ],
+    "Week 11|Facility BK-LTK|Wednesday|Session 2-4|Room Type 3": [
+        [
+            "CO1007",
+            "CC02"
+        ]
+    ],
+    "Week 11|Facility BK-LTK|Wednesday|Session 5-7|Room Type 3": [
+        [
+            "CO3001",
+            "CC03"
+        ]
+    ],
+    "Week 11|Facility BK-LTK|Wednesday|Session 7-9|Room Type 3": [
+        [
+            "CO2011",
+            "CC06"
+        ]
+    ],
+    "Week 11|Facility BK-LTK|Wednesday|Session 8-10|Room Type 3": [
+        [
+            "CO2011",
+            "CN02"
+        ]
+    ],
+    "Week 11|Facility BK-LTK|Thursday|Session 2-2|Room Type 3": [
+        [
+            "CO4029",
+            "CC02"
+        ]
+    ],
+    "Week 11|Facility BK-LTK|Friday|Session 2-2|Room Type 2": [
+        [
+            "CO3091",
+            "CC01"
+        ]
+    ],
+    "Week 11|Facility BK-LTK|Friday|Session 5-7|Room Type 3": [
+        [
+            "CO3001",
+            "CC04"
+        ]
+    ],
+    "Week 11|Facility BK-LTK|Friday|Session 7-9|Room Type 3": [
+        [
+            "CO2011",
+            "CC05"
+        ]
+    ],
+    "Week 12|Facility BK-DAn|Monday|Session 2-2|Room Type 3": [
+        [
+            "CO4029",
+            "L02"
+        ]
+    ],
+    "Week 12|Facility BK-DAn|Monday|Session 6-8|Room Type 3": [
+        [
+            "CO2017",
+            "L02"
+        ]
+    ],
+    "Week 12|Facility BK-DAn|Tuesday|Session 2-4|Room Type 5": [
+        [
+            "CO3093",
+            "L04"
+        ]
+    ],
+    "Week 12|Facility BK-DAn|Tuesday|Session 5-5|Room Type 3": [
+        [
+            "CO4041",
+            "L01"
+        ]
+    ],
+    "Week 12|Facility BK-DAn|Tuesday|Session 7-7|Room Type 3": [
+        [
+            "CO3091",
+            "L01"
+        ]
+    ],
+    "Week 12|Facility BK-DAn|Tuesday|Session 10-10|Room Type 3": [
+        [
+            "CO3091",
+            "L02"
+        ],
+        [
+            "CO3091",
+            "L03"
+        ]
+    ],
+    "Week 12|Facility BK-DAn|Wednesday|Session 4-6|Room Type 3": [
+        [
+            "CO2017",
+            "L03"
+        ]
+    ],
+    "Week 12|Facility BK-DAn|Wednesday|Session 5-7|Room Type 4": [
+        [
+            "CO2011",
+            "L05"
+        ]
+    ],
+    "Week 12|Facility BK-DAn|Wednesday|Session 6-6|Room Type 3": [
+        [
+            "CO4041",
+            "L02"
+        ]
+    ],
+    "Week 12|Facility BK-DAn|Wednesday|Session 8-10|Room Type 4": [
+        [
+            "CO2011",
+            "L06"
+        ]
+    ],
+    "Week 12|Facility BK-DAn|Thursday|Session 3-5|Room Type 4": [
+        [
+            "CO2011",
+            "L04"
+        ]
+    ],
+    "Week 12|Facility BK-DAn|Thursday|Session 5-7|Room Type 5": [
+        [
+            "CO2003",
+            "L04"
+        ]
+    ],
+    "Week 12|Facility BK-DAn|Thursday|Session 9-11|Room Type 4": [
+        [
+            "CO3001",
+            "L05"
+        ]
+    ],
+    "Week 12|Facility BK-DAn|Friday|Session 5-8|Room Type 3": [
+        [
+            "CO2013",
+            "L05"
+        ]
+    ],
+    "Week 12|Facility BK-DAn|Friday|Session 6-6|Room Type 3": [
+        [
+            "CO4029",
+            "L03"
+        ]
+    ],
+    "Week 12|Facility BK-DAn|Friday|Session 7-9|Room Type 4": [
+        [
+            "CO3001",
+            "L04"
+        ]
+    ],
+    "Week 12|Facility BK-DAn|Friday|Session 8-8|Room Type 3": [
+        [
+            "CO4029",
+            "L04"
+        ]
+    ],
+    "Week 12|Facility BK-DAn|Friday|Session 9-11|Room Type 5": [
+        [
+            "CO3093",
+            "L05"
+        ]
+    ],
+    "Week 12|Facility BK-DAn|Friday|Session 10-10|Room Type 3": [
+        [
+            "CO4029",
+            "L01"
+        ]
+    ],
+    "Week 12|Facility BK-LTK|Monday|Session 2-4|Room Type 3": [
+        [
+            "CO3093",
+            "CC03"
+        ]
+    ],
+    "Week 12|Facility BK-LTK|Monday|Session 3-3|Room Type 3": [
+        [
+            "CO4029",
+            "CN01"
+        ]
+    ],
+    "Week 12|Facility BK-LTK|Monday|Session 7-7|Room Type 3": [
+        [
+            "CO4041",
+            "CC01"
+        ]
+    ],
+    "Week 12|Facility BK-LTK|Monday|Session 11-11|Room Type 3": [
+        [
+            "CO4029",
+            "CC01"
+        ]
+    ],
+    "Week 12|Facility BK-LTK|Tuesday|Session 3-5|Room Type 3": [
+        [
+            "CO2003",
+            "CN02"
+        ]
+    ],
+    "Week 12|Facility BK-LTK|Tuesday|Session 5-7|Room Type 3": [
+        [
+            "CO3093",
+            "CC04"
+        ]
+    ],
+    "Week 12|Facility BK-LTK|Tuesday|Session 11-13|Room Type 3": [
+        [
+            "CO2003",
+            "CC05"
+        ]
+    ],
+    "Week 12|Facility BK-LTK|Wednesday|Session 2-4|Room Type 3": [
+        [
+            "CO1007",
+            "CC02"
+        ]
+    ],
+    "Week 12|Facility BK-LTK|Wednesday|Session 5-7|Room Type 3": [
+        [
+            "CO3001",
+            "CC03"
+        ]
+    ],
+    "Week 12|Facility BK-LTK|Wednesday|Session 7-9|Room Type 3": [
+        [
+            "CO2011",
+            "CC06"
+        ]
+    ],
+    "Week 12|Facility BK-LTK|Wednesday|Session 8-10|Room Type 3": [
+        [
+            "CO2011",
+            "CN02"
+        ]
+    ],
+    "Week 12|Facility BK-LTK|Thursday|Session 2-2|Room Type 3": [
+        [
+            "CO4029",
+            "CC02"
+        ]
+    ],
+    "Week 12|Facility BK-LTK|Friday|Session 2-2|Room Type 2": [
+        [
+            "CO3091",
+            "CC01"
+        ]
+    ],
+    "Week 12|Facility BK-LTK|Friday|Session 5-7|Room Type 3": [
+        [
+            "CO3001",
+            "CC04"
+        ]
+    ],
+    "Week 12|Facility BK-LTK|Friday|Session 7-9|Room Type 3": [
+        [
+            "CO2011",
+            "CC05"
+        ]
+    ],
+    "Week 13|Facility BK-DAn|Monday|Session 2-2|Room Type 3": [
+        [
+            "CO4029",
+            "L02"
+        ]
+    ],
+    "Week 13|Facility BK-DAn|Monday|Session 6-8|Room Type 3": [
+        [
+            "CO2017",
+            "L02"
+        ]
+    ],
+    "Week 13|Facility BK-DAn|Tuesday|Session 2-4|Room Type 5": [
+        [
+            "CO3093",
+            "L04"
+        ]
+    ],
+    "Week 13|Facility BK-DAn|Tuesday|Session 5-5|Room Type 3": [
+        [
+            "CO4041",
+            "L01"
+        ]
+    ],
+    "Week 13|Facility BK-DAn|Tuesday|Session 7-7|Room Type 3": [
+        [
+            "CO3091",
+            "L01"
+        ]
+    ],
+    "Week 13|Facility BK-DAn|Tuesday|Session 10-10|Room Type 3": [
+        [
+            "CO3091",
+            "L02"
+        ],
+        [
+            "CO3091",
+            "L03"
+        ]
+    ],
+    "Week 13|Facility BK-DAn|Wednesday|Session 4-6|Room Type 3": [
+        [
+            "CO2017",
+            "L03"
+        ]
+    ],
+    "Week 13|Facility BK-DAn|Wednesday|Session 5-7|Room Type 4": [
+        [
+            "CO2011",
+            "L05"
+        ]
+    ],
+    "Week 13|Facility BK-DAn|Wednesday|Session 6-6|Room Type 3": [
+        [
+            "CO4041",
+            "L02"
+        ]
+    ],
+    "Week 13|Facility BK-DAn|Wednesday|Session 8-10|Room Type 4": [
+        [
+            "CO2011",
+            "L06"
+        ]
+    ],
+    "Week 13|Facility BK-DAn|Thursday|Session 3-5|Room Type 4": [
+        [
+            "CO2011",
+            "L04"
+        ]
+    ],
+    "Week 13|Facility BK-DAn|Thursday|Session 5-7|Room Type 5": [
+        [
+            "CO2003",
+            "L04"
+        ]
+    ],
+    "Week 13|Facility BK-DAn|Thursday|Session 9-11|Room Type 4": [
+        [
+            "CO3001",
+            "L05"
+        ]
+    ],
+    "Week 13|Facility BK-DAn|Friday|Session 5-8|Room Type 3": [
+        [
+            "CO2013",
+            "L05"
+        ]
+    ],
+    "Week 13|Facility BK-DAn|Friday|Session 6-6|Room Type 3": [
+        [
+            "CO4029",
+            "L03"
+        ]
+    ],
+    "Week 13|Facility BK-DAn|Friday|Session 7-9|Room Type 4": [
+        [
+            "CO3001",
+            "L04"
+        ]
+    ],
+    "Week 13|Facility BK-DAn|Friday|Session 8-8|Room Type 3": [
+        [
+            "CO4029",
+            "L04"
+        ]
+    ],
+    "Week 13|Facility BK-DAn|Friday|Session 9-11|Room Type 5": [
+        [
+            "CO3093",
+            "L05"
+        ]
+    ],
+    "Week 13|Facility BK-DAn|Friday|Session 10-10|Room Type 3": [
+        [
+            "CO4029",
+            "L01"
+        ]
+    ],
+    "Week 13|Facility BK-LTK|Monday|Session 2-4|Room Type 3": [
+        [
+            "CO3093",
+            "CC03"
+        ]
+    ],
+    "Week 13|Facility BK-LTK|Monday|Session 3-3|Room Type 3": [
+        [
+            "CO4029",
+            "CN01"
+        ]
+    ],
+    "Week 13|Facility BK-LTK|Monday|Session 7-7|Room Type 3": [
+        [
+            "CO4041",
+            "CC01"
+        ]
+    ],
+    "Week 13|Facility BK-LTK|Monday|Session 11-11|Room Type 3": [
+        [
+            "CO4029",
+            "CC01"
+        ]
+    ],
+    "Week 13|Facility BK-LTK|Tuesday|Session 3-5|Room Type 3": [
+        [
+            "CO2003",
+            "CN02"
+        ]
+    ],
+    "Week 13|Facility BK-LTK|Tuesday|Session 5-7|Room Type 3": [
+        [
+            "CO3093",
+            "CC04"
+        ]
+    ],
+    "Week 13|Facility BK-LTK|Tuesday|Session 11-13|Room Type 3": [
+        [
+            "CO2003",
+            "CC05"
+        ]
+    ],
+    "Week 13|Facility BK-LTK|Wednesday|Session 2-4|Room Type 3": [
+        [
+            "CO1007",
+            "CC02"
+        ]
+    ],
+    "Week 13|Facility BK-LTK|Wednesday|Session 5-7|Room Type 3": [
+        [
+            "CO3001",
+            "CC03"
+        ]
+    ],
+    "Week 13|Facility BK-LTK|Wednesday|Session 7-9|Room Type 3": [
+        [
+            "CO2011",
+            "CC06"
+        ]
+    ],
+    "Week 13|Facility BK-LTK|Wednesday|Session 8-10|Room Type 3": [
+        [
+            "CO2011",
+            "CN02"
+        ]
+    ],
+    "Week 13|Facility BK-LTK|Thursday|Session 2-2|Room Type 3": [
+        [
+            "CO4029",
+            "CC02"
+        ]
+    ],
+    "Week 13|Facility BK-LTK|Friday|Session 2-2|Room Type 2": [
+        [
+            "CO3091",
+            "CC01"
+        ]
+    ],
+    "Week 13|Facility BK-LTK|Friday|Session 5-7|Room Type 3": [
+        [
+            "CO3001",
+            "CC04"
+        ]
+    ],
+    "Week 13|Facility BK-LTK|Friday|Session 7-9|Room Type 3": [
+        [
+            "CO2011",
+            "CC05"
+        ]
+    ],
+    "Week 14|Facility BK-DAn|Monday|Session 2-2|Room Type 3": [
+        [
+            "CO4029",
+            "L02"
+        ]
+    ],
+    "Week 14|Facility BK-DAn|Monday|Session 6-8|Room Type 3": [
+        [
+            "CO2017",
+            "L02"
+        ]
+    ],
+    "Week 14|Facility BK-DAn|Tuesday|Session 2-4|Room Type 5": [
+        [
+            "CO3093",
+            "L04"
+        ]
+    ],
+    "Week 14|Facility BK-DAn|Tuesday|Session 5-5|Room Type 3": [
+        [
+            "CO4041",
+            "L01"
+        ]
+    ],
+    "Week 14|Facility BK-DAn|Tuesday|Session 7-7|Room Type 3": [
+        [
+            "CO3091",
+            "L01"
+        ]
+    ],
+    "Week 14|Facility BK-DAn|Tuesday|Session 10-10|Room Type 3": [
+        [
+            "CO3091",
+            "L02"
+        ],
+        [
+            "CO3091",
+            "L03"
+        ]
+    ],
+    "Week 14|Facility BK-DAn|Wednesday|Session 4-6|Room Type 3": [
+        [
+            "CO2017",
+            "L03"
+        ]
+    ],
+    "Week 14|Facility BK-DAn|Wednesday|Session 5-7|Room Type 4": [
+        [
+            "CO2011",
+            "L05"
+        ]
+    ],
+    "Week 14|Facility BK-DAn|Wednesday|Session 6-6|Room Type 3": [
+        [
+            "CO4041",
+            "L02"
+        ]
+    ],
+    "Week 14|Facility BK-DAn|Wednesday|Session 8-10|Room Type 4": [
+        [
+            "CO2011",
+            "L06"
+        ]
+    ],
+    "Week 14|Facility BK-DAn|Thursday|Session 3-5|Room Type 4": [
+        [
+            "CO2011",
+            "L04"
+        ]
+    ],
+    "Week 14|Facility BK-DAn|Thursday|Session 5-7|Room Type 5": [
+        [
+            "CO2003",
+            "L04"
+        ]
+    ],
+    "Week 14|Facility BK-DAn|Thursday|Session 9-11|Room Type 4": [
+        [
+            "CO3001",
+            "L05"
+        ]
+    ],
+    "Week 14|Facility BK-DAn|Friday|Session 5-8|Room Type 3": [
+        [
+            "CO2013",
+            "L05"
+        ]
+    ],
+    "Week 14|Facility BK-DAn|Friday|Session 6-6|Room Type 3": [
+        [
+            "CO4029",
+            "L03"
+        ]
+    ],
+    "Week 14|Facility BK-DAn|Friday|Session 7-9|Room Type 4": [
+        [
+            "CO3001",
+            "L04"
+        ]
+    ],
+    "Week 14|Facility BK-DAn|Friday|Session 8-8|Room Type 3": [
+        [
+            "CO4029",
+            "L04"
+        ]
+    ],
+    "Week 14|Facility BK-DAn|Friday|Session 9-11|Room Type 5": [
+        [
+            "CO3093",
+            "L05"
+        ]
+    ],
+    "Week 14|Facility BK-DAn|Friday|Session 10-10|Room Type 3": [
+        [
+            "CO4029",
+            "L01"
+        ]
+    ],
+    "Week 14|Facility BK-LTK|Monday|Session 2-4|Room Type 3": [
+        [
+            "CO3093",
+            "CC03"
+        ]
+    ],
+    "Week 14|Facility BK-LTK|Monday|Session 3-3|Room Type 3": [
+        [
+            "CO4029",
+            "CN01"
+        ]
+    ],
+    "Week 14|Facility BK-LTK|Monday|Session 7-7|Room Type 3": [
+        [
+            "CO4041",
+            "CC01"
+        ]
+    ],
+    "Week 14|Facility BK-LTK|Monday|Session 11-11|Room Type 3": [
+        [
+            "CO4029",
+            "CC01"
+        ]
+    ],
+    "Week 14|Facility BK-LTK|Tuesday|Session 3-5|Room Type 3": [
+        [
+            "CO2003",
+            "CN02"
+        ]
+    ],
+    "Week 14|Facility BK-LTK|Tuesday|Session 5-7|Room Type 3": [
+        [
+            "CO3093",
+            "CC04"
+        ]
+    ],
+    "Week 14|Facility BK-LTK|Tuesday|Session 11-13|Room Type 3": [
+        [
+            "CO2003",
+            "CC05"
+        ]
+    ],
+    "Week 14|Facility BK-LTK|Wednesday|Session 2-4|Room Type 3": [
+        [
+            "CO1007",
+            "CC02"
+        ]
+    ],
+    "Week 14|Facility BK-LTK|Wednesday|Session 5-7|Room Type 3": [
+        [
+            "CO3001",
+            "CC03"
+        ]
+    ],
+    "Week 14|Facility BK-LTK|Wednesday|Session 7-9|Room Type 3": [
+        [
+            "CO2011",
+            "CC06"
+        ]
+    ],
+    "Week 14|Facility BK-LTK|Wednesday|Session 8-10|Room Type 3": [
+        [
+            "CO2011",
+            "CN02"
+        ]
+    ],
+    "Week 14|Facility BK-LTK|Thursday|Session 2-2|Room Type 3": [
+        [
+            "CO4029",
+            "CC02"
+        ]
+    ],
+    "Week 14|Facility BK-LTK|Friday|Session 2-2|Room Type 2": [
+        [
+            "CO3091",
+            "CC01"
+        ]
+    ],
+    "Week 14|Facility BK-LTK|Friday|Session 5-7|Room Type 3": [
+        [
+            "CO3001",
+            "CC04"
+        ]
+    ],
+    "Week 14|Facility BK-LTK|Friday|Session 7-9|Room Type 3": [
+        [
+            "CO2011",
+            "CC05"
+        ]
+    ],
+    "Week 15|Facility BK-DAn|Monday|Session 2-2|Room Type 3": [
+        [
+            "CO4029",
+            "L02"
+        ]
+    ],
+    "Week 15|Facility BK-DAn|Monday|Session 6-8|Room Type 3": [
+        [
+            "CO2017",
+            "L02"
+        ]
+    ],
+    "Week 15|Facility BK-DAn|Tuesday|Session 2-4|Room Type 5": [
+        [
+            "CO3093",
+            "L04"
+        ]
+    ],
+    "Week 15|Facility BK-DAn|Tuesday|Session 5-5|Room Type 3": [
+        [
+            "CO4041",
+            "L01"
+        ]
+    ],
+    "Week 15|Facility BK-DAn|Tuesday|Session 7-7|Room Type 3": [
+        [
+            "CO3091",
+            "L01"
+        ]
+    ],
+    "Week 15|Facility BK-DAn|Tuesday|Session 10-10|Room Type 3": [
+        [
+            "CO3091",
+            "L02"
+        ],
+        [
+            "CO3091",
+            "L03"
+        ]
+    ],
+    "Week 15|Facility BK-DAn|Wednesday|Session 4-6|Room Type 3": [
+        [
+            "CO2017",
+            "L03"
+        ]
+    ],
+    "Week 15|Facility BK-DAn|Wednesday|Session 5-7|Room Type 4": [
+        [
+            "CO2011",
+            "L05"
+        ]
+    ],
+    "Week 15|Facility BK-DAn|Wednesday|Session 6-6|Room Type 3": [
+        [
+            "CO4041",
+            "L02"
+        ]
+    ],
+    "Week 15|Facility BK-DAn|Wednesday|Session 8-10|Room Type 4": [
+        [
+            "CO2011",
+            "L06"
+        ]
+    ],
+    "Week 15|Facility BK-DAn|Thursday|Session 3-5|Room Type 4": [
+        [
+            "CO2011",
+            "L04"
+        ]
+    ],
+    "Week 15|Facility BK-DAn|Thursday|Session 5-7|Room Type 5": [
+        [
+            "CO2003",
+            "L04"
+        ]
+    ],
+    "Week 15|Facility BK-DAn|Thursday|Session 9-11|Room Type 4": [
+        [
+            "CO3001",
+            "L05"
+        ]
+    ],
+    "Week 15|Facility BK-DAn|Friday|Session 5-8|Room Type 3": [
+        [
+            "CO2013",
+            "L05"
+        ]
+    ],
+    "Week 15|Facility BK-DAn|Friday|Session 6-6|Room Type 3": [
+        [
+            "CO4029",
+            "L03"
+        ]
+    ],
+    "Week 15|Facility BK-DAn|Friday|Session 7-9|Room Type 4": [
+        [
+            "CO3001",
+            "L04"
+        ]
+    ],
+    "Week 15|Facility BK-DAn|Friday|Session 8-8|Room Type 3": [
+        [
+            "CO4029",
+            "L04"
+        ]
+    ],
+    "Week 15|Facility BK-DAn|Friday|Session 9-11|Room Type 5": [
+        [
+            "CO3093",
+            "L05"
+        ]
+    ],
+    "Week 15|Facility BK-DAn|Friday|Session 10-10|Room Type 3": [
+        [
+            "CO4029",
+            "L01"
+        ]
+    ],
+    "Week 15|Facility BK-LTK|Monday|Session 2-4|Room Type 3": [
+        [
+            "CO3093",
+            "CC03"
+        ]
+    ],
+    "Week 15|Facility BK-LTK|Monday|Session 3-3|Room Type 3": [
+        [
+            "CO4029",
+            "CN01"
+        ]
+    ],
+    "Week 15|Facility BK-LTK|Monday|Session 7-7|Room Type 3": [
+        [
+            "CO4041",
+            "CC01"
+        ]
+    ],
+    "Week 15|Facility BK-LTK|Monday|Session 11-11|Room Type 3": [
+        [
+            "CO4029",
+            "CC01"
+        ]
+    ],
+    "Week 15|Facility BK-LTK|Tuesday|Session 3-5|Room Type 3": [
+        [
+            "CO2003",
+            "CN02"
+        ]
+    ],
+    "Week 15|Facility BK-LTK|Tuesday|Session 5-7|Room Type 3": [
+        [
+            "CO3093",
+            "CC04"
+        ]
+    ],
+    "Week 15|Facility BK-LTK|Tuesday|Session 11-13|Room Type 3": [
+        [
+            "CO2003",
+            "CC05"
+        ]
+    ],
+    "Week 15|Facility BK-LTK|Wednesday|Session 2-4|Room Type 3": [
+        [
+            "CO1007",
+            "CC02"
+        ]
+    ],
+    "Week 15|Facility BK-LTK|Wednesday|Session 5-7|Room Type 3": [
+        [
+            "CO3001",
+            "CC03"
+        ]
+    ],
+    "Week 15|Facility BK-LTK|Wednesday|Session 7-9|Room Type 3": [
+        [
+            "CO2011",
+            "CC06"
+        ]
+    ],
+    "Week 15|Facility BK-LTK|Wednesday|Session 8-10|Room Type 3": [
+        [
+            "CO2011",
+            "CN02"
+        ]
+    ],
+    "Week 15|Facility BK-LTK|Thursday|Session 2-2|Room Type 3": [
+        [
+            "CO4029",
+            "CC02"
+        ]
+    ],
+    "Week 15|Facility BK-LTK|Friday|Session 2-2|Room Type 2": [
+        [
+            "CO3091",
+            "CC01"
+        ]
+    ],
+    "Week 15|Facility BK-LTK|Friday|Session 5-7|Room Type 3": [
+        [
+            "CO3001",
+            "CC04"
+        ]
+    ],
+    "Week 15|Facility BK-LTK|Friday|Session 7-9|Room Type 3": [
+        [
+            "CO2011",
+            "CC05"
+        ]
+    ],
+    "Week 16|Facility BK-DAn|Monday|Session 2-2|Room Type 3": [
+        [
+            "CO4029",
+            "L02"
+        ]
+    ],
+    "Week 16|Facility BK-DAn|Monday|Session 6-8|Room Type 3": [
+        [
+            "CO2017",
+            "L02"
+        ]
+    ],
+    "Week 16|Facility BK-DAn|Tuesday|Session 2-4|Room Type 5": [
+        [
+            "CO3093",
+            "L04"
+        ]
+    ],
+    "Week 16|Facility BK-DAn|Tuesday|Session 5-5|Room Type 3": [
+        [
+            "CO4041",
+            "L01"
+        ]
+    ],
+    "Week 16|Facility BK-DAn|Tuesday|Session 7-7|Room Type 3": [
+        [
+            "CO3091",
+            "L01"
+        ]
+    ],
+    "Week 16|Facility BK-DAn|Tuesday|Session 10-10|Room Type 3": [
+        [
+            "CO3091",
+            "L02"
+        ],
+        [
+            "CO3091",
+            "L03"
+        ]
+    ],
+    "Week 16|Facility BK-DAn|Wednesday|Session 4-6|Room Type 3": [
+        [
+            "CO2017",
+            "L03"
+        ]
+    ],
+    "Week 16|Facility BK-DAn|Wednesday|Session 5-7|Room Type 4": [
+        [
+            "CO2011",
+            "L05"
+        ]
+    ],
+    "Week 16|Facility BK-DAn|Wednesday|Session 6-6|Room Type 3": [
+        [
+            "CO4041",
+            "L02"
+        ]
+    ],
+    "Week 16|Facility BK-DAn|Wednesday|Session 8-10|Room Type 4": [
+        [
+            "CO2011",
+            "L06"
+        ]
+    ],
+    "Week 16|Facility BK-DAn|Thursday|Session 3-5|Room Type 4": [
+        [
+            "CO2011",
+            "L04"
+        ]
+    ],
+    "Week 16|Facility BK-DAn|Thursday|Session 5-7|Room Type 5": [
+        [
+            "CO2003",
+            "L04"
+        ]
+    ],
+    "Week 16|Facility BK-DAn|Thursday|Session 9-11|Room Type 4": [
+        [
+            "CO3001",
+            "L05"
+        ]
+    ],
+    "Week 16|Facility BK-DAn|Friday|Session 5-8|Room Type 3": [
+        [
+            "CO2013",
+            "L05"
+        ]
+    ],
+    "Week 16|Facility BK-DAn|Friday|Session 6-6|Room Type 3": [
+        [
+            "CO4029",
+            "L03"
+        ]
+    ],
+    "Week 16|Facility BK-DAn|Friday|Session 7-9|Room Type 4": [
+        [
+            "CO3001",
+            "L04"
+        ]
+    ],
+    "Week 16|Facility BK-DAn|Friday|Session 8-8|Room Type 3": [
+        [
+            "CO4029",
+            "L04"
+        ]
+    ],
+    "Week 16|Facility BK-DAn|Friday|Session 9-11|Room Type 5": [
+        [
+            "CO3093",
+            "L05"
+        ]
+    ],
+    "Week 16|Facility BK-DAn|Friday|Session 10-10|Room Type 3": [
+        [
+            "CO4029",
+            "L01"
+        ]
+    ],
+    "Week 16|Facility BK-LTK|Monday|Session 2-4|Room Type 3": [
+        [
+            "CO3093",
+            "CC03"
+        ]
+    ],
+    "Week 16|Facility BK-LTK|Monday|Session 3-3|Room Type 3": [
+        [
+            "CO4029",
+            "CN01"
+        ]
+    ],
+    "Week 16|Facility BK-LTK|Monday|Session 7-7|Room Type 3": [
+        [
+            "CO4041",
+            "CC01"
+        ]
+    ],
+    "Week 16|Facility BK-LTK|Monday|Session 11-11|Room Type 3": [
+        [
+            "CO4029",
+            "CC01"
+        ]
+    ],
+    "Week 16|Facility BK-LTK|Tuesday|Session 3-5|Room Type 3": [
+        [
+            "CO2003",
+            "CN02"
+        ]
+    ],
+    "Week 16|Facility BK-LTK|Tuesday|Session 5-7|Room Type 3": [
+        [
+            "CO3093",
+            "CC04"
+        ]
+    ],
+    "Week 16|Facility BK-LTK|Tuesday|Session 11-13|Room Type 3": [
+        [
+            "CO2003",
+            "CC05"
+        ]
+    ],
+    "Week 16|Facility BK-LTK|Wednesday|Session 2-4|Room Type 3": [
+        [
+            "CO1007",
+            "CC02"
+        ]
+    ],
+    "Week 16|Facility BK-LTK|Wednesday|Session 5-7|Room Type 3": [
+        [
+            "CO3001",
+            "CC03"
+        ]
+    ],
+    "Week 16|Facility BK-LTK|Wednesday|Session 7-9|Room Type 3": [
+        [
+            "CO2011",
+            "CC06"
+        ]
+    ],
+    "Week 16|Facility BK-LTK|Wednesday|Session 8-10|Room Type 3": [
+        [
+            "CO2011",
+            "CN02"
+        ]
+    ],
+    "Week 16|Facility BK-LTK|Thursday|Session 2-2|Room Type 3": [
+        [
+            "CO4029",
+            "CC02"
+        ]
+    ],
+    "Week 16|Facility BK-LTK|Friday|Session 2-2|Room Type 2": [
+        [
+            "CO3091",
+            "CC01"
+        ]
+    ],
+    "Week 16|Facility BK-LTK|Friday|Session 5-7|Room Type 3": [
+        [
+            "CO3001",
+            "CC04"
+        ]
+    ],
+    "Week 16|Facility BK-LTK|Friday|Session 7-9|Room Type 3": [
+        [
+            "CO2011",
+            "CC05"
+        ]
+    ]
+}
