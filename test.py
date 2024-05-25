@@ -119,7 +119,7 @@ FIXED_SHEET_FILE_NAME = ["Dự kiến SVMT_241 (thầy Cường).xlsx"]  # sau n
 REFERENCE_SHEET_FILE_NAME = "final_TKB_update20230915.xlsx"  # file tham khảo từ 1 học kỳ trước. Ở đây là 231
 LAB_SHEET_FILE_NAME = "HK241_CSE_Xep TKB ThucHanh-ThiNghiem.xlsx"
 LAB_SHEET_NAMES = ['HK241 TKB LAB', 'CS1', 'CS2']
-SHEET_FILE_PATH = f"/Users/vinhvu/Sched/{SHEET_FILE_NAME}"
+SHEET_FILE_PATH = f"/Users/twang/Documents/GitHub/Sched/{SHEET_FILE_NAME}"
 SHEET_NAMES = ['Thống kê', 'Phản hồi', 'KHGD', 'Môn học', 'reference']  # 'reference' đại diện cho file HK231
 
 assert os.path.exists(SHEET_FILE_PATH)
@@ -697,7 +697,26 @@ for gen in np.concatenate((chromosome.chromosome, fixed_chromosome.chromosome)):
 ClassDictGlobal
 
 """# GA Algorithm"""
+def repair_room_type_id(gen):
+    info = parse_gen(gen)
+    if 'tn' in SUBJECT_ID_TO_NAME.get(info.subject_id) and info.room_type_id not in ["1", "2"]:
+        room_type_id = random.choice(["1", "2"])  # Chọn ngẫu nhiên giữa "1" và "2"
+        new_bitstring = format(info.day, "03b") + format(info.session_start, "04b") + format(int(room_type_id), "03b") + info.weeks_bitstring
+        new_gen = "-".join([info.subject_id, info.group_id, new_bitstring])
+        return new_gen
+    if info.room_type_id not in VALID_ROOM_TYPE_ID:
+        room_type_id = "1"  # Default to "1" cho các trường hợp khác
+        new_bitstring = format(info.day, "03b") + format(info.session_start, "04b") + format(int(room_type_id), "03b") + info.weeks_bitstring
+        new_gen = "-".join([info.subject_id, info.group_id, new_bitstring])
+        return new_gen
+    return gen
 
+# Hàm sửa lỗi cho toàn bộ quần thể
+def repair_population(population):
+    for ind in population:
+        for idx_gen, gen in enumerate(ind.chromosome):
+            ind.chromosome[idx_gen] = repair_room_type_id(gen)
+    return population
 
 ############# GA Module ##################
 
@@ -707,6 +726,7 @@ def init_population(data0, data1, size_of_population):
     for i in range(size_of_population):
         new_individual = CHROMOSOME_GA(data0, data1)
         new_population.append(new_individual)
+    new_population = repair_population(new_population)
     return np.asarray(new_population)
 
 def select_mating_pool(population, fitness_list, elitism_size):
@@ -736,8 +756,8 @@ def crossover(parents, lower_threshold=[0.3, 0.1, 0.5, 0.3]):
             else:
                 offspring_1 += bitstring_1[s:e]
                 offspring_2 += bitstring_2[s:e]
-        child_1.chromosome[chromosome_swap_index] = np.str_(offspring_1)
-        child_2.chromosome[chromosome_swap_index] = np.str_(offspring_2)
+        child_1.chromosome[chromosome_swap_index] = np.str_(repair_room_type_id(offspring_1))
+        child_2.chromosome[chromosome_swap_index] = np.str_(repair_room_type_id(offspring_2))
         offsprings.append(child_1)
         offsprings.append(child_2)
     return np.array(offsprings)
@@ -753,8 +773,10 @@ def mutation(population, mutation_rate, lower_threshold=[0.5, 0.1, 0.7, 0.5]):
                     if random.random() > thresh:
                         mut_idx = start_bitstring_index + random.randrange(s, e)
                         gen = gen[:mut_idx] + str(random.randint(0, 1)) + gen[mut_idx + 1:]
-                chromosome.chromosome[idx] = gen
+                chromosome.chromosome[idx] = repair_room_type_id(gen)
     return np.asarray(offsprings)
+
+
 
 def selection(chromosomes, fitness_results, population_size, elitism_size):
     combined_data = list(zip(chromosomes, fitness_results))
@@ -870,7 +892,7 @@ class InvalidSessionConstraint(ConstraintBase):
 
 class InvalidRoomTypeIdConstraint(ConstraintBase):
     def __init__(self):
-        super().__init__("Invalid Room Type Id", ConstraintTypeSoft())
+        super().__init__("Invalid Room Type Id", ConstraintTypeHard())
         self.active = True
         self._logging = defaultdict(int)
         self.invalid_room_type_id_cases = 0
@@ -879,11 +901,12 @@ class InvalidRoomTypeIdConstraint(ConstraintBase):
     def __call__(self, chromosome):
         for idx, gen in enumerate(chromosome.chromosome):
             info = parse_gen(gen)
-
+            if "(tn)" in info.subject_id and info.room_type_id not in ["1", "2"]:
+                self._logging['invalid_room_type_id_cases'] += 9999999999999999999
+                ConstraintBase.InvalidIndices.append(idx)
             if info.room_type_id not in VALID_ROOM_TYPE_ID:
                 self._logging['invalid_room_type_id_cases'] += 1
                 ConstraintBase.InvalidIndices.append(idx)
-
         return self._logging
 
     @property
@@ -1149,14 +1172,21 @@ def get_all_constraints() -> list:
 
 def repair_room_type_id(gen):
     info = parse_gen(gen)
-    if info.room_type_id not in VALID_ROOM_TYPE_ID or info.room_type_id == '0':
-        # Sửa lỗi room_type_id bằng cách chọn giá trị hợp lệ ngẫu nhiên
-        room_type_id = random.choice(VALID_ROOM_TYPE_ID)
-        new_bitstring = format(int(room_type_id), "03b") + info.weeks_bitstring
-        new_gen = "-".join([info.subject_id, info.group_id,
-                            "".join([format(info.day, '03b'), format(info.session_start, '04b'), new_bitstring])])
+    # print(info.room_type_id)
+    if 'tn' in SUBJECT_ID_TO_NAME.get(info.subject_id) and info.room_type_id not in ["1", "2"]:
+        room_type_id = random.choice(["1", "2"])  # Chọn ngẫu nhiên giữa "1" và "2"
+        new_bitstring = format(info.day, "03b") + format(info.session_start, "04b") + format(int(room_type_id), "03b") + info.weeks_bitstring
+        new_gen = "-".join([info.subject_id, info.group_id, new_bitstring])
         return new_gen
+    if info.room_type_id not in VALID_ROOM_TYPE_ID:
+        room_type_id = "1"  # Default to "1" cho các trường hợp khác
+        new_bitstring = format(info.day, "03b") + format(info.session_start, "04b") + format(int(room_type_id), "03b") + info.weeks_bitstring
+        new_gen = "-".join([info.subject_id, info.group_id, new_bitstring])
+    # info = parse_gen(new_gen)
     return gen
+
+
+
 
 def tracking_chromosome_fitness(chromosome):
     fitness = 0
@@ -1166,7 +1196,7 @@ def tracking_chromosome_fitness(chromosome):
     ConstraintBase.InvalidIndices = []
     repaired_chromosome = deepcopy(chromosome)
 
-    # Sửa chữa các gen có room_type_id không hợp lệ
+    # Apply repair function to each gen
     for idx, gen in enumerate(repaired_chromosome.chromosome):
         repaired_chromosome.chromosome[idx] = repair_room_type_id(gen)
 
@@ -1195,12 +1225,12 @@ tracking_chromosome_fitness(fixed_chromosome)
 
 """# Train GA"""
 
-num_generations = 1
-population_size = 20
-
-mating_rate = 0.6
-crossover_rate = 0.8
-mutation_rate = 0.3
+# num_generations = 1
+# population_size = 20
+#
+# mating_rate = 0.6
+# crossover_rate = 0.8
+# mutation_rate = 0.3
 
 
 # Hàm này dùng để tăng khả năng mutation cũng như crossover đặc biệt cho các đoạn gen cần thiết để giảm fitness cho toàn bộ invidual,
@@ -1223,8 +1253,32 @@ def merge_with_fixed_chromosome(chromosome):
     merged_chromosome.chromosome = np.concatenate((fixed_chromosome.chromosome, merged_chromosome.chromosome))
     return merged_chromosome
 
-# def train_ga(data0, data1, num_generations=200, population_size=200, elitism_size=100, mating_rate=0.7, crossover_rate=0.8, mutation_rate=0.9):
+def periodic_restart(population, data0, data1, restart_threshold, generation):
+    if generation % restart_threshold == 0:
+        new_population = init_population(data0, data1, len(population))
+        population[:len(new_population)//2] = new_population[:len(new_population)//2]
+        population = repair_population(population)
+    return population
+
+def adaptive_mutation(population, base_mutation_rate, generation, max_generations):
+    mutation_rate = base_mutation_rate * (1 - generation / max_generations)
+    offsprings = mutation(population, mutation_rate)
+    for idx, ind in enumerate(offsprings):
+        for idx_gen, gen in enumerate(ind.chromosome):
+            ind.chromosome[idx_gen] = repair_room_type_id(gen)
+    return offsprings
+# def repair_population(population):
+#     for ind in population:
+#         for idx_gen, gen in enumerate(ind.chromosome):
+#             ind.chromosome[idx_gen] = repair_room_type_id(gen)
+#     return population
+
+# Sửa chữa quần thể trước khi đánh giá fitness
+# def train_ga_with_strategies(data0, data1, num_generations=100, population_size=100, elitism_size=10,
+#                              mating_rate=0.7, crossover_rate=0.8, base_mutation_rate=0.2, restart_threshold=50):
 #     population = init_population(data0, data1, population_size)
+#     population = repair_population(population)
+#
 #     fitness_list = [tracking_chromosome_fitness(merge_with_fixed_chromosome(ind))['fitness'] for ind in population]
 #     best_fitness = min(fitness_list)
 #     best_chromosome = population[np.argmin(fitness_list)]
@@ -1233,10 +1287,17 @@ def merge_with_fixed_chromosome(chromosome):
 #     for gen_idx in tqdm(range(num_generations)):
 #         parents = select_mating_pool(population, fitness_list, elitism_size)
 #         offspring_crossover = crossover(parents)
-#         offspring_mutation = mutation(offspring_crossover, mutation_rate)
+#         offspring_mutation = adaptive_mutation(offspring_crossover, base_mutation_rate, gen_idx, num_generations)
 #         total_population = np.concatenate((parents, offspring_crossover, offspring_mutation))
+#         total_population = periodic_restart(total_population, data0, data1, restart_threshold, gen_idx)
+#
+#         total_population = repair_population(total_population)
+#
 #         fitness_results = [tracking_chromosome_fitness(merge_with_fixed_chromosome(ind))['fitness'] for ind in total_population]
 #         population, fitness_list = selection(total_population, fitness_results, population_size, elitism_size)
+#
+#         population = repair_population(population)
+#
 #         current_best_fitness = min(fitness_list)
 #         current_best_chromosome = population[np.argmin(fitness_list)]
 #         if current_best_fitness < best_fitness:
@@ -1252,34 +1313,16 @@ def merge_with_fixed_chromosome(chromosome):
 #         if best_fitness == 0:
 #             break
 #
-#     return best_chromosome,global_logging
-#
-# # Call the train_ga function with appropriate parameters
-# best_chromosome,global_logging = train_ga(df0, df3, num_generations=200, population_size=150, elitism_size=30, mating_rate=0.7, crossover_rate=0.8, mutation_rate=0.9)
-# tracking_result = tracking_chromosome_fitness(merge_with_fixed_chromosome(best_chromosome))
-# print(tracking_result)
+#     return best_chromosome, global_logging
 
-def adaptive_mutation(population, base_mutation_rate, generation, max_generations):
-    mutation_rate = base_mutation_rate * (1 - generation / max_generations)
-    return mutation(population, mutation_rate)
-
-def periodic_restart(population, data0, data1, restart_threshold, generation):
-    if generation % restart_threshold == 0:
-        new_population = init_population(data0, data1, len(population))
-        population[:len(new_population)//2] = new_population[:len(new_population)//2]
-    return population
-
+# Call the train_ga_with_strategies function with appropriate parameters
 def train_ga_with_strategies(data0, data1, num_generations=100, population_size=100, elitism_size=10,
                              mating_rate=0.7, crossover_rate=0.8, base_mutation_rate=0.2, restart_threshold=50):
     population = init_population(data0, data1, population_size)
+    population = repair_population(population)
     fitness_list = [tracking_chromosome_fitness(merge_with_fixed_chromosome(ind))['fitness'] for ind in population]
     best_fitness = min(fitness_list)
     best_chromosome = population[np.argmin(fitness_list)]
-    best_chromosome_repair = deepcopy(best_chromosome)
-
-    for idx, gen in enumerate(best_chromosome_repair.chromosome):
-        best_chromosome_repair.chromosome[idx] = repair_room_type_id(gen)
-
     global_logging = []
 
     for gen_idx in tqdm(range(num_generations)):
@@ -1287,17 +1330,19 @@ def train_ga_with_strategies(data0, data1, num_generations=100, population_size=
         offspring_crossover = crossover(parents)
         offspring_mutation = adaptive_mutation(offspring_crossover, base_mutation_rate, gen_idx, num_generations)
         total_population = np.concatenate((parents, offspring_crossover, offspring_mutation))
+        total_population = repair_population(total_population)
         total_population = periodic_restart(total_population, data0, data1, restart_threshold, gen_idx)
+        total_population = repair_population(total_population)
+
         fitness_results = [tracking_chromosome_fitness(merge_with_fixed_chromosome(ind))['fitness'] for ind in total_population]
         population, fitness_list = selection(total_population, fitness_results, population_size, elitism_size)
+        population = repair_population(population)
+
         current_best_fitness = min(fitness_list)
         current_best_chromosome = population[np.argmin(fitness_list)]
         if current_best_fitness < best_fitness:
             best_fitness = current_best_fitness
             best_chromosome = current_best_chromosome
-            best_chromosome_repair = deepcopy(best_chromosome)
-            for idx, gen in enumerate(best_chromosome_repair.chromosome):
-                best_chromosome_repair.chromosome[idx] = repair_room_type_id(gen)
 
         print(f"Generation {gen_idx} | Best Fitness: {best_fitness}")
         global_logging.append({
@@ -1308,17 +1353,17 @@ def train_ga_with_strategies(data0, data1, num_generations=100, population_size=
         if best_fitness == 0:
             break
 
-    return best_chromosome_repair, global_logging
+    return best_chromosome, global_logging
 
 # Call the train_ga_with_strategies function with appropriate parameters
 best_chromosome, global_logging = train_ga_with_strategies(
     df0, df3,
-    num_generations=100,    # Tăng số thế hệ
-    population_size=150,    # Tăng kích thước quần thể
-    elitism_size=20,        # Tăng kích thước elitism
+    num_generations=200,    # Tăng số thế hệ
+    population_size=300,    # Tăng kích thước quần thể
+    elitism_size=5,        # Tăng kích thước elitism
     mating_rate=0.8,        # Tăng tỉ lệ phối giống
     crossover_rate=0.9,     # Tăng tỉ lệ lai ghép
-    base_mutation_rate=0.05,# Sử dụng tỉ lệ đột biến thích nghi
+    base_mutation_rate=0.2, # Sử dụng tỉ lệ đột biến thích nghi
     restart_threshold=50    # Sử dụng chiến lược khởi tạo lại định kỳ
 )
 tracking_result = tracking_chromosome_fitness(merge_with_fixed_chromosome(best_chromosome))
@@ -1400,7 +1445,7 @@ df = pd.DataFrame(data)
 k = len(fixed_chromosome.chromosome)
 df = df.style.apply(lambda x: ['background: lightblue' if i < k else '' for i in range(len(x))])
 # Define the file path to save the Excel file
-file_path = '/Users/vinhvu/Sched/BK-Calendar-Ver1-12.xlsx'
+file_path = '/Users/twang/Documents/GitHub/Sched/BK-Calendar-Ver1-12.xlsx'
 
 # Write the DataFrame to an Excel file
 df.to_excel(file_path, index=False)
@@ -1465,7 +1510,7 @@ for gen in best_chromosome.chromosome:
 df = pd.DataFrame(data)
 
 # Define the file path to save the Excel file
-file_path = '/Users/vinhvu/Sched/TKB-241.xlsx'
+file_path = '/Users/twang/Documents/GitHub/Sched/TKB-241.xlsx'
 
 # Write the DataFrame to an Excel file
 df.to_excel(file_path, index=False)
