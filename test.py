@@ -1332,7 +1332,7 @@ while not exists:
         print('error_cases', tracking_result['error_cases'])
         global_logging.append(tracking_result['error_cases'])
         global_logging[-1]['fitness'] = fitness
-        if fitness == 0 or tracking_result['error_cases']['total_invalid_session_cases'] <= 6:
+        if fitness == 0 or tracking_result['error_cases']['total_invalid_session_cases'] <= 4:
             exists = True
             break
         print(fitness)
@@ -1347,21 +1347,21 @@ tracking_chromosome_fitness(merge_with_fixed_chromosome(population[0]))
 """
 
 # import matplotlib.pyplot as plt
-
+#
 # # Extract features from global_logging
 # features = list(tracking_result['error_cases'].keys())
-
+#
 # # Iterate over each feature
 # for feature in features:
 #     # Create a new figure for each feature
 #     plt.figure()
-
+#
 #     # Extract data for the current feature
 #     data = [entry[feature] for entry in global_logging]
-
+#
 #     # Plot the line chart with dots at each index
 #     plt.plot(range(len(data)), data)
-
+#
 #     # Add labels and title
 #     plt.xlabel('Epoch')
 #     plt.ylabel(feature)
