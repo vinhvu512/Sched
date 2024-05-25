@@ -87,6 +87,7 @@ Xem thêm tại `brainstorm.docs` trong cùng thư mục
 import os
 
 from holoviews.ipython import display
+from matplotlib import pyplot as plt
 from tqdm import tqdm
 import numpy as np
 import pandas as pd
@@ -99,7 +100,7 @@ import math
 import pandas as pd
 from collections import defaultdict
 from itertools import combinations
-import gdown
+# import gdown
 
 # url_dk241 = "https://docs.google.com/spreadsheets/d/1hV1XwhXpQaPgd0mTZ8_xmxIyRPpVEXyQ/edit?usp=drive_link&ouid=105374451612561775917&rtpof=true&sd=true"
 # sheet_dk241 = "Dự-kiến-SVMT_241.xlsx"
@@ -118,7 +119,7 @@ FIXED_SHEET_FILE_NAME = ["Dự kiến SVMT_241 (thầy Cường).xlsx"]  # sau n
 REFERENCE_SHEET_FILE_NAME = "final_TKB_update20230915.xlsx"  # file tham khảo từ 1 học kỳ trước. Ở đây là 231
 LAB_SHEET_FILE_NAME = "HK241_CSE_Xep TKB ThucHanh-ThiNghiem.xlsx"
 LAB_SHEET_NAMES = ['HK241 TKB LAB', 'CS1', 'CS2']
-SHEET_FILE_PATH = f"/Users/vinhvu/Sched/{SHEET_FILE_NAME}"
+SHEET_FILE_PATH = f"/Users/twang/Documents/GitHub/Sched/{SHEET_FILE_NAME}"
 SHEET_NAMES = ['Thống kê', 'Phản hồi', 'KHGD', 'Môn học', 'reference']  # 'reference' đại diện cho file HK231
 
 assert os.path.exists(SHEET_FILE_PATH)
@@ -706,58 +707,28 @@ def init_population(data0, data1, size_of_population):
     for i in range(size_of_population):
         new_individual = CHROMOSOME_GA(data0, data1)
         new_population.append(new_individual)
-    new_population = np.asarray(new_population)
-    return new_population
+    return np.asarray(new_population)
 
-
-def select_mating_pool(population, mating_rate, fitness_list):
-    if fitness_list is None:
-        fitness_list = [1] * len(population)
-    assert len(population) == len(fitness_list)
-    # Convert fitness list to numpy array
-    fitness_array = np.asarray(fitness_list)
-
-    # Calculate selection probabilities based on fitness
-    selection_probabilities = fitness_array / sum(fitness_array)
-    # print(selection_probabilities)
-
-    # Select indices of individuals for the mating pool based on probabilities
-    index = np.random.choice(population.shape[0], size=int(len(population) * mating_rate), replace=False,
-                             p=selection_probabilities)
-
-    # Extract selected individuals
-    mating_pool = population[index]
-
-    # Remove selected individuals from the population
-    population = np.delete(population, index, axis=0)
-
+def select_mating_pool(population, fitness_list, elitism_size):
+    sorted_indices = np.argsort(fitness_list)
+    mating_pool = population[sorted_indices[:elitism_size]]
     return mating_pool
 
-
 def crossover(parents, lower_threshold=[0.3, 0.1, 0.5, 0.3]):
-    mating_pool = deepcopy(parents)
     offsprings = []
-    while mating_pool.size > 0:
-        # Select 2 parents from pool
-        mating_idx = np.random.choice(mating_pool.shape[0], 2, replace=False)
-        mating_parents = mating_pool[mating_idx]
-        parent_1, parent_2 = mating_parents
-        ### Begin Crossover
+    while len(offsprings) < len(parents):
+        parent_1, parent_2 = random.sample(list(parents), 2)
+        child_1, child_2 = deepcopy(parent_1), deepcopy(parent_2)
         chromosome_swap_index = random.randrange(len(parent_1.chromosome))
         parent_1_str = str(parent_1.chromosome[chromosome_swap_index])
         parent_2_str = str(parent_2.chromosome[chromosome_swap_index])
         parent_1_components = parent_1_str.split("-")
         parent_2_components = parent_2_str.split("-")
-
-        constant_attrs_1, bitstring_1 = parent_1_components[:-1], parent_1_components[-1]  # type: list, str
-        constant_attrs_2, bitstring_2 = parent_2_components[:-1], parent_2_components[-1]  # type: list, str
-        # Keep constant attribute
+        constant_attrs_1, bitstring_1 = parent_1_components[:-1], parent_1_components[-1]
+        constant_attrs_2, bitstring_2 = parent_2_components[:-1], parent_2_components[-1]
         offspring_1 = "-".join(constant_attrs_1) + "-"
         offspring_2 = "-".join(constant_attrs_2) + "-"
-
-        # day of week: 3 bits, session_start: 4 bits, room_type: 3 bits, active_week: 18 bits
         range_index = [(0, 3), (3, 7), (7, 10), (10, len(bitstring_1))]
-        lower_threshold
         for (s, e), thresh in zip(range_index, lower_threshold):
             if random.random() > thresh:
                 offspring_1 += bitstring_2[s:e]
@@ -765,55 +736,37 @@ def crossover(parents, lower_threshold=[0.3, 0.1, 0.5, 0.3]):
             else:
                 offspring_1 += bitstring_1[s:e]
                 offspring_2 += bitstring_2[s:e]
-
-        ### End Crossover
-        parent_1.chromosome[chromosome_swap_index] = np.str_(offspring_1)
-        parent_2.chromosome[chromosome_swap_index] = np.str_(offspring_2)
-        # Save new offsprings and delete crossovered parents
-        offsprings.append(parent_1)
-        offsprings.append(parent_2)
-        mating_pool = np.delete(mating_pool, list(mating_idx), axis=0)
-
+        child_1.chromosome[chromosome_swap_index] = np.str_(offspring_1)
+        child_2.chromosome[chromosome_swap_index] = np.str_(offspring_2)
+        offsprings.append(child_1)
+        offsprings.append(child_2)
     return np.array(offsprings)
 
-
 def mutation(population, mutation_rate, lower_threshold=[0.5, 0.1, 0.7, 0.5]):
-    _population = deepcopy(population)
-    offsprings = []
-    # Mutation changes a number of genes as defined by the num_mutations argument. The changes are random.
-    for chromosome in _population:
-        new_chromosome = []
-        for _, gen in enumerate(chromosome.chromosome):
+    offsprings = deepcopy(population)
+    for chromosome in offsprings:
+        for idx, gen in enumerate(chromosome.chromosome):
             if random.uniform(0, 1) < mutation_rate:
-                # Mutation for each part of bitstring: day, room_type_id,...
                 start_bitstring_index = gen.rfind("-") + 1
                 range_index = [(0, 3), (3, 7), (7, 10), (10, len(gen.split('-')[-1]))]
-                lower_threshold
                 for (s, e), thresh in zip(range_index, lower_threshold):
                     if random.random() > thresh:
                         mut_idx = start_bitstring_index + random.randrange(s, e)
                         gen = gen[:mut_idx] + str(random.randint(0, 1)) + gen[mut_idx + 1:]
-            new_chromosome.append(gen)
-        chromosome.chromosome = new_chromosome
-        offsprings.append(chromosome)
+                chromosome.chromosome[idx] = gen
     return np.asarray(offsprings)
 
-
-#############################
-# Tracking Chromosome Fitness
-
-def selection(chromosomes, fitness_results: List[int], population_size):
-    # Combine chromosomes with their corresponding tracking results
+def selection(chromosomes, fitness_results, population_size, elitism_size):
     combined_data = list(zip(chromosomes, fitness_results))
-
-    # Sort the combined data based on tracking results
-    sorted_data = sorted(combined_data, key=lambda x: x[1], reverse=False)
-
-    # Select the top population_size chromosomes
-    selected_chromosomes = [data[0] for data in sorted_data[:population_size]]
-    fitness_list = [data[1] for data in sorted_data[:population_size]]
-
-    return np.asarray(selected_chromosomes), np.asarray(fitness_list)
+    sorted_data = sorted(combined_data, key=lambda x: x[1])
+    elite_individuals = [data[0] for data in sorted_data[:elitism_size]]
+    remaining_individuals = [data[0] for data in sorted_data[elitism_size:]]
+    if len(remaining_individuals) < (population_size - elitism_size):
+        selected_individuals = elite_individuals + remaining_individuals
+    else:
+        selected_individuals = elite_individuals + random.sample(remaining_individuals, population_size - elitism_size)
+    fitness_list = [tracking_chromosome_fitness(merge_with_fixed_chromosome(ind))['fitness'] for ind in selected_individuals]
+    return np.asarray(selected_individuals), np.asarray(fitness_list)
 
 
 """## GA Constraints
@@ -1190,29 +1143,10 @@ class MidTermOccurConstraint(ConstraintBase):
 
 
 def get_all_constraints() -> list:
-    # List all class names
     constraints = [(name, obj()) for name, obj in globals().items() if
-                   name.endswith("Constraint") and isinstance(obj, type) and issubclass(obj,
-                                                                                        ConstraintBase) and obj().active]
+                   name.endswith("Constraint") and isinstance(obj, type) and issubclass(obj, ConstraintBase) and obj().active]
     return constraints
 
-
-# class TrackingLog:
-#     def __init__(self):
-#         self.total_invalid_cases = 0
-#         self.invalid_day = 0
-#         self.invalid_session_start = 0
-#         self.invalid_session_end = 0
-#         self.invalid_room_type_id = 0
-#         self.smaller_room = 0
-#         self.overload_room_cases = 0
-
-# def calculate_fitness(tracking_log: TrackingLog):
-#     track = vars(tracking_log)
-#     global SC_penalty_point, HC_penalty_point
-#     hard_cases = track['invalid_day'] + track['invalid_session_start'] + track['invalid_session_end'] + track['invalid_room_type_id'] + track['overload_room_cases']
-#     soft_cases = track['smaller_room']
-#     return hard_cases * HC_penalty_point + soft_cases * SC_penalty_point
 
 def tracking_chromosome_fitness(chromosome):
     fitness = 0
@@ -1221,17 +1155,14 @@ def tracking_chromosome_fitness(chromosome):
     active_constraints = []
     ConstraintBase.InvalidIndices = []
     for constraint_name, constraint_func in get_all_constraints():
-        # print(constraint_name)
         active_constraints.append(constraint_name)
         for key, value in constraint_func(chromosome).items():
             if key in error_cases:
                 error_cases[key] += value
             else:
                 error_cases[key] = value
-        # print(constraint_func.fitness)
         fitness += constraint_func.fitness
         vars_depend_fitness[constraint_func.vars_depend] += constraint_func.fitness
-
     return {
         "fitness": fitness,
         "error_cases": error_cases,
@@ -1275,71 +1206,113 @@ def merge_with_fixed_chromosome(chromosome):
     merged_chromosome.chromosome = np.concatenate((fixed_chromosome.chromosome, merged_chromosome.chromosome))
     return merged_chromosome
 
+# def train_ga(data0, data1, num_generations=200, population_size=200, elitism_size=100, mating_rate=0.7, crossover_rate=0.8, mutation_rate=0.9):
+#     population = init_population(data0, data1, population_size)
+#     fitness_list = [tracking_chromosome_fitness(merge_with_fixed_chromosome(ind))['fitness'] for ind in population]
+#     best_fitness = min(fitness_list)
+#     best_chromosome = population[np.argmin(fitness_list)]
+#     global_logging = []
+#
+#     for gen_idx in tqdm(range(num_generations)):
+#         parents = select_mating_pool(population, fitness_list, elitism_size)
+#         offspring_crossover = crossover(parents)
+#         offspring_mutation = mutation(offspring_crossover, mutation_rate)
+#         total_population = np.concatenate((parents, offspring_crossover, offspring_mutation))
+#         fitness_results = [tracking_chromosome_fitness(merge_with_fixed_chromosome(ind))['fitness'] for ind in total_population]
+#         population, fitness_list = selection(total_population, fitness_results, population_size, elitism_size)
+#         current_best_fitness = min(fitness_list)
+#         current_best_chromosome = population[np.argmin(fitness_list)]
+#         if current_best_fitness < best_fitness:
+#             best_fitness = current_best_fitness
+#             best_chromosome = current_best_chromosome
+#
+#         print(f"Generation {gen_idx} | Best Fitness: {best_fitness}")
+#         global_logging.append({
+#             'generation': gen_idx,
+#             'best_fitness': best_fitness,
+#             'fitness_list': fitness_list
+#         })
+#         if best_fitness == 0:
+#             break
+#
+#     return best_chromosome,global_logging
+#
+# # Call the train_ga function with appropriate parameters
+# best_chromosome,global_logging = train_ga(df0, df3, num_generations=200, population_size=150, elitism_size=30, mating_rate=0.7, crossover_rate=0.8, mutation_rate=0.9)
+# tracking_result = tracking_chromosome_fitness(merge_with_fixed_chromosome(best_chromosome))
+# print(tracking_result)
 
-# Để tăng tốc quá trình GA, bên dưới đây đi theo hướng: khởi tạo population nhiều lần, và GA 1 epoch
-# Để sửa lại theo đúng lý thuyết GA, bỏ vòng lặp while
+def adaptive_mutation(population, base_mutation_rate, generation, max_generations):
+    mutation_rate = base_mutation_rate * (1 - generation / max_generations)
+    return mutation(population, mutation_rate)
 
-population = init_population(df0, df3, population_size)
-fitness_list = None
-global_logging = []
-exists = False
-while not exists:
-    if exists:
-        break
-    fitness_list = None
+def periodic_restart(population, data0, data1, restart_threshold, generation):
+    if generation % restart_threshold == 0:
+        new_population = init_population(data0, data1, len(population))
+        population[:len(new_population)//2] = new_population[:len(new_population)//2]
+    return population
+
+def train_ga_with_strategies(data0, data1, num_generations=100, population_size=100, elitism_size=10,
+                             mating_rate=0.7, crossover_rate=0.8, base_mutation_rate=0.2, restart_threshold=50):
+    population = init_population(data0, data1, population_size)
+    fitness_list = [tracking_chromosome_fitness(merge_with_fixed_chromosome(ind))['fitness'] for ind in population]
+    best_fitness = min(fitness_list)
+    best_chromosome = population[np.argmin(fitness_list)]
     global_logging = []
-    population = init_population(df0, df3, population_size)
+
     for gen_idx in tqdm(range(num_generations)):
-        ### Select the best parents for mating
-        parents = select_mating_pool(population, mating_rate, fitness_list)
-        ### Crossover
-        offspring_crossover = crossover(parents,
-                                        # crossover_lower_threshold
-                                        )
-        ### Mutation: Take every individual in the offspring after crossover to mutate with a given rate
-        offspring_mutation = mutation(offspring_crossover,
-                                      mutation_rate,
-                                      #   mutation_lower_threshold
-                                      )
-        total_chromosome = np.concatenate(
-            (
-                deepcopy(offspring_crossover),
-                deepcopy(offspring_mutation),
-                deepcopy(population),
-            )
-        )  # combine current population and offspring chromosomes
-        fitness_results = []
-        for chromosome in total_chromosome:
-            tracking_result = tracking_chromosome_fitness(merge_with_fixed_chromosome(chromosome))
-            fitness_results.append(tracking_result['fitness'])
+        parents = select_mating_pool(population, fitness_list, elitism_size)
+        offspring_crossover = crossover(parents)
+        offspring_mutation = adaptive_mutation(offspring_crossover, base_mutation_rate, gen_idx, num_generations)
+        total_population = np.concatenate((parents, offspring_crossover, offspring_mutation))
+        total_population = periodic_restart(total_population, data0, data1, restart_threshold, gen_idx)
+        fitness_results = [tracking_chromosome_fitness(merge_with_fixed_chromosome(ind))['fitness'] for ind in total_population]
+        population, fitness_list = selection(total_population, fitness_results, population_size, elitism_size)
+        current_best_fitness = min(fitness_list)
+        current_best_chromosome = population[np.argmin(fitness_list)]
+        if current_best_fitness < best_fitness:
+            best_fitness = current_best_fitness
+            best_chromosome = current_best_chromosome
 
-        ### Selecting a new population for the next generation from parents and offsprings
-        best_population_list, fitness_list = selection(total_chromosome, fitness_results, population_size)
-        population = best_population_list
-
-        ### Show the best
-        tracking_result = tracking_chromosome_fitness(merge_with_fixed_chromosome(population[0]))
-        # tracking_log = vars(track_result['tracking_log'])
-        fitness = tracking_result['fitness']
-        # global_logging.append({
-        #     key: val for key, val in list(tracking_log.items()) + [("index", gen_idx), ("fitness", fitness)]
-        # })
-        vars_depend_fitness = tracking_result['vars_depend_fitness']
-        # mutation_lower_threshold = generate_lower_threshold([vars_depend_fitness['day'], vars_depend_fitness['session_start'], vars_depend_fitness['room_type_id'], vars_depend_fitness['weeks_bitstring']])
-        # crossover_lower_threshold = 1
-        # print(mutation_lower_threshold)
-        print('||' * 20)
-        print('error_cases', tracking_result['error_cases'])
-        global_logging.append(tracking_result['error_cases'])
-        global_logging[-1]['fitness'] = fitness
-        if fitness == 0 or tracking_result['error_cases']['total_invalid_session_cases'] <= 6:
-            exists = True
+        print(f"Generation {gen_idx} | Best Fitness: {best_fitness}")
+        global_logging.append({
+            'generation': gen_idx,
+            'best_fitness': best_fitness,
+            'fitness_list': fitness_list
+        })
+        if best_fitness == 0:
             break
-        print(fitness)
 
-tracking_chromosome_fitness(merge_with_fixed_chromosome(population[0]))
+    return best_chromosome, global_logging
+
+# Call the train_ga_with_strategies function with appropriate parameters
+best_chromosome, global_logging = train_ga_with_strategies(
+    df0, df3,
+    num_generations=1000,    # Tăng số thế hệ
+    population_size=150,    # Tăng kích thước quần thể
+    elitism_size=20,        # Tăng kích thước elitism
+    mating_rate=0.8,        # Tăng tỉ lệ phối giống
+    crossover_rate=0.9,     # Tăng tỉ lệ lai ghép
+    base_mutation_rate=0.05,# Sử dụng tỉ lệ đột biến thích nghi
+    restart_threshold=50    # Sử dụng chiến lược khởi tạo lại định kỳ
+)
+tracking_result = tracking_chromosome_fitness(merge_with_fixed_chromosome(best_chromosome))
+print(tracking_result)
+def plot_fitness(global_logging):
+    generations = [log['generation'] for log in global_logging]
+    best_fitness = [log['best_fitness'] for log in global_logging]
+
+    plt.figure(figsize=(10, 6))
+    plt.plot(generations, best_fitness, marker='o', linestyle='-', color='b')
+    plt.xlabel('Generation')
+    plt.ylabel('Best Fitness')
+    plt.title('Fitness Progression Over Generations')
+    plt.grid(True)
+    plt.show()
 
 
+# Call the function with global_logging data
+plot_fitness(global_logging)
 
 """# Result Tracking
 
@@ -1374,273 +1347,273 @@ tracking_chromosome_fitness(merge_with_fixed_chromosome(population[0]))
 """## Save as "Phản hồi"
 """
 
-import pandas as pd
-
-# Assuming data is a list of dictionaries where each dictionary represents a row of data
-# Example:
-data = []
-for gen in merge_with_fixed_chromosome(population[0]).chromosome:
-    info = parse_gen(gen)
-    new_row = {
-        'Mã môn học': info.subject_id,
-        'Tên môn học': SUBJECT_ID_TO_NAME.get(info.subject_id, "INVALID"),
-        'Loại hình lớp': PROGRAM_ID_REVERSE.get(GROUP_ID_TO_PROGRAM_ID.get(info.group_id[:-2], "INVALID"), "INVALID"),
-        'Mã nhóm': info.group_id,
-        'Số tiết': NUMBER_OF_SESSION.get(info.subject_id, "INVALID"),
-        'Mã GV': ClassDictGlobal[f"{info.subject_id}-{info.group_id}"].teacher_id,
-        'Mã Phòng': None,
-        'Loại Phòng': ROOM_TYPE_ID_REVERSE.get(info.room_type_id, "INVALID"),
-        'Thứ': info.day,
-        'Tiết BD': info.session_start,
-    }
-    for idx, bit in enumerate(info.weeks_bitstring):
-        new_row[f"Week {idx + 1}"] = 'x' if bit == '1' else None
-    data.append(new_row)
-
-# Create a DataFrame from the data
-df = pd.DataFrame(data)
-k = len(fixed_chromosome.chromosome)
-df = df.style.apply(lambda x: ['background: lightblue' if i < k else '' for i in range(len(x))])
-# Define the file path to save the Excel file
-file_path = '/Users/vinhvu/Sched/BK-Calendar-Ver1-12.xlsx'
-
-# Write the DataFrame to an Excel file
-df.to_excel(file_path, index=False)
-
-print("Excel file saved successfully.")
-
-# !cp /content/{file_path} /gdrive/MyDrive/HCMUT-Scheduling/
-
-"""## Save as "Tham khảo HK231"
-"""
-
-import pandas as pd
-
-# Assuming data is a list of dictionaries where each dictionary represents a row of data
-# Example:
-data = []
-for gen in population[0].chromosome:
-    info = parse_gen(gen)
-    new_row = {
-        'f_malp': "",
-        'f_mamh': info.subject_id,
-        'f_tenmhvn': SUBJECT_ID_TO_NAME.get(info.subject_id, "INVALID"),
-        'f_dvht': SUBJECT_INFO[info.subject_id]['f_dvht'],
-        'f_ts': SUBJECT_INFO[info.subject_id]['f_ts'],
-        'f_lt': SUBJECT_INFO[info.subject_id]['f_lt'],
-        'f_bt': SUBJECT_INFO[info.subject_id]['f_bt'],
-        'f_tn': SUBJECT_INFO[info.subject_id]['f_tn'],
-        'f_btl': SUBJECT_INFO[info.subject_id]['f_btl'],
-        'f_da': SUBJECT_INFO[info.subject_id]['f_da'],
-        'f_la': SUBJECT_INFO[info.subject_id]['f_la'],
-        'f_mh_mabm': None,
-        'f_mh_tenbm': PROGRAM_ID_REVERSE.get(GROUP_ID_TO_PROGRAM_ID.get(info.group_id[:-2], "INVALID"), "INVALID"),
-        'f_manh': info.group_id,
-        'f_sosv': None,
-        'f_sstb': 0,
-        'f_succhua': ROOM_TYPE_ID_REVERSE.get(info.room_type_id, "INVALID"),
-        'f_sosv1': None,
-        'f_sodk': None,
-        'f_tuan1': 0,
-        'f_thu': {i: calendar.day_name[i] for i in range(7)}.get(info.day - 2, "INVALID"),
-        'f_tietbd': info.session_start if NUMBER_OF_SESSION.get(info.subject_id,
-                                                                "INVALID") != "INVALID" and NUMBER_OF_SESSION.get(
-            info.subject_id, "INVALID") + info.session_start in VALID_SESSION else "INVALID",
-        'f_sotiet': NUMBER_OF_SESSION.get(info.subject_id, "INVALID"),
-        'f_manv': None,
-        'f_holotvn': None,
-        'f_tenvn': None,
-        'f_mabm': None,
-        'f_tenbm': None,
-        'f_tenph': None,
-        'f_diadiem': FACILITY_ID[FACILITY[info.group_id[:-2]]],
-        'f_mamh_lt': None,
-        'f_makhoa': 'MT',
-        'f_tenkhoa': 'KH & KT Máy tính',
-        'f_manh_lt': None
-    }
-    for idx, bit in enumerate(info.weeks_bitstring):
-        new_row[f"t{idx + 1}"] = 'x' if bit == '1' else None
-    data.append(new_row)
-
-# Create a DataFrame from the data
-df = pd.DataFrame(data)
-
-# Define the file path to save the Excel file
-file_path = '/Users/vinhvu/Sched/TKB-241.xlsx'
-
-# Write the DataFrame to an Excel file
-df.to_excel(file_path, index=False)
-
-print("Excel file saved successfully.")
-
-"""# Appendix: Hyper parameters Number of room in each facility
-
-```
-# Param 1
-NUMBER_OF_ROOM = { # '-'.join(facility, room_type_id) BK-DAn, BK-LTK
-    "DAn-1": 30, # loại phòng 40 chỗ
-    "DAn-2": 5, # loại phòng 60 chỗ
-    "DAn-3": 20, # loại phòng 80 chỗ
-    "DAn-4": 5, # loại phòng 140 chỗ
-    "DAn-5": 3, # loại phòng 160 chỗ
-    "DAn-6": 2, # loại phòng 200 chỗ (hội trường, 211H1)
-
-    "LTK-1": 30,
-    "LTK-2": 5,
-    "LTK-3": 20,
-    "LTK-4": 5,
-    "LTK-5": 3,
-    "LTK-6": 2
-}
-# Param 2
-NUMBER_OF_ROOM = { # '-'.join(facility, room_type_id) BK-DAn, BK-LTK
-    "DAn-1": 30, # loại phòng 40 chỗ
-    "DAn-2": 5, # loại phòng 60 chỗ
-    "DAn-3": 10, # loại phòng 80 chỗ
-    "DAn-4": 5, # loại phòng 140 chỗ
-    "DAn-5": 3, # loại phòng 160 chỗ
-    "DAn-6": 2, # loại phòng 200 chỗ (hội trường, 211H1)
-
-    "LTK-1": 30,
-    "LTK-2": 5,
-    "LTK-3": 10,
-    "LTK-4": 5,
-    "LTK-5": 3,
-    "LTK-6": 2
-}
-```
-
-
-
-```
-tracking_log dict_items([('total_invalid_cases', 0), ('invalid_day', 0), ('invalid_session_start', 0), ('invalid_room_type_id', 0), ('smaller_room', 0), ('overload_room_cases', 0)])
-
-```
-
-```
-NUMBER_OF_ROOM = { # '-'.join(facility, room_type_id) BK-DAn, BK-LTK
-    "DAn-1": 25, # loại phòng 40 chỗ
-    "DAn-2": 10, # loại phòng 60 chỗ
-    "DAn-3": 15, # loại phòng 80 chỗ
-    "DAn-4": 5, # loại phòng 140 chỗ
-    "DAn-5": 5, # loại phòng 160 chỗ
-    "DAn-6": 5, # loại phòng 200 chỗ (hội trường, 211H1)
-
-    "LTK-1": 25,
-    "LTK-2": 10,
-    "LTK-3": 15,
-    "LTK-4": 5,
-    "LTK-5": 5,
-    "LTK-6": 5
-}
-```
-
-
-
-```
-tracking_log dict_items([('total_invalid_cases', 6), ('invalid_day', 1), ('invalid_session_start', 3), ('invalid_room_type_id', 2), ('smaller_room', 1), ('overload_room_cases', 0)])
-```
-
-```
-NUMBER_OF_ROOM = { # '-'.join(facility, room_type_id) BK-DAn, BK-LTK
-    "DAn-1": 25, # loại phòng 40 chỗ
-    "DAn-2": 10, # loại phòng 60 chỗ
-    "DAn-3": 10, # loại phòng 80 chỗ
-    "DAn-4": 5, # loại phòng 140 chỗ
-    "DAn-5": 5, # loại phòng 160 chỗ
-    "DAn-6": 5, # loại phòng 200 chỗ (hội trường, 211H1)
-
-    "LTK-1": 25,
-    "LTK-2": 10,
-    "LTK-3": 10,
-    "LTK-4": 5,
-    "LTK-5": 5,
-    "LTK-6": 5
-}
-```
-
-
-
-```
-tracking_log dict_items([('total_invalid_cases', 4), ('invalid_day', 1), ('invalid_session_start', 3), ('invalid_room_type_id', 0), ('smaller_room', 1), ('overload_room_cases', 1)])
-
-
-```
-
-```
-NUMBER_OF_ROOM = { # '-'.join(facility, room_type_id) BK-DAn, BK-LTK
-    "DAn-1": 20, # loại phòng 40 chỗ
-    "DAn-2": 15, # loại phòng 60 chỗ
-    "DAn-3": 10, # loại phòng 80 chỗ
-    "DAn-4": 5, # loại phòng 140 chỗ
-    "DAn-5": 5, # loại phòng 160 chỗ
-    "DAn-6": 5, # loại phòng 200 chỗ (hội trường, 211H1)
-
-    "LTK-1": 20,
-    "LTK-2": 15,
-    "LTK-3": 10,
-    "LTK-4": 5,
-    "LTK-5": 5,
-    "LTK-6": 5
-}
-```
-
-
-
-```
-tracking_log dict_items([('total_invalid_cases', 44), ('invalid_day', 10), ('invalid_session_start', 18), ('invalid_room_type_id', 17), ('smaller_room', 4), ('overload_room_cases', 3)])
-
-```
-
-# Appendix: Visualize helper function
-"""
-
-
-def visualize_calendar(chromosome):
-    time_loc_dict = {}
-    global_active = []
-    keys_index = ['week', 'day', 'session_start', 'num_session', 'facility', 'room_type_id']
-    for gen in chromosome.chromosome:
-        info = parse_gen(gen)
-
-        facility = FACILITY[info.group_id[
-                            :-2]]  # get value of key (L or CC or CN) because the 2 last letter is number of group liek 01, 02
-        for idx, bit in enumerate(info.weeks_bitstring):
-            if bit == '1':
-                _key = {
-                    "week": idx + 1,
-                    "day": info.day,
-                    "session_start": info.session_start,
-                    "num_session": NUMBER_OF_SESSION[info.subject_id],
-                    "facility": facility,
-                    "room_type_id": info.room_type_id
-                }
-                _key = tuple(list(_key.values()))
-                if _key in time_loc_dict:
-                    time_loc_dict[_key] += [(info.subject_id, info.group_id)]
-                else:
-                    time_loc_dict[_key] = [(info.subject_id, info.group_id)]
-
-                global_active.append(_key)
-
-    sort_keys = ['week', 'facility', 'day', 'session_start', 'room_type_id']
-    sort_keys = [keys_index.index(key) for key in sort_keys]
-    sorted_global_active = sorted(global_active, key=lambda x: tuple(x[i] for i in sort_keys))
-
-    def add_key_name(key):
-        week, day, session_start, num_session, facility, room_type_id = key
-        day = {i: calendar.day_name[i] for i in range(7)}.get(day - 2)
-        key = f"Week {week}|Facility BK-{facility}|{day}|Session {session_start}-{session_start + num_session}|Room Type {room_type_id}"
-        return key
-
-    result = {add_key_name(key): time_loc_dict[key] for key in sorted_global_active}
-    return result
-
-
-visualize_calendar(population[0])
-
-import json
-
-with open("BK-Calendar.json", 'w') as json_file:
-    json.dump(visualize_calendar(population[0]), json_file, indent=4)
+# import pandas as pd
+#
+# # Assuming data is a list of dictionaries where each dictionary represents a row of data
+# # Example:
+# data = []
+# for gen in merge_with_fixed_chromosome(population[0]).chromosome:
+#     info = parse_gen(gen)
+#     new_row = {
+#         'Mã môn học': info.subject_id,
+#         'Tên môn học': SUBJECT_ID_TO_NAME.get(info.subject_id, "INVALID"),
+#         'Loại hình lớp': PROGRAM_ID_REVERSE.get(GROUP_ID_TO_PROGRAM_ID.get(info.group_id[:-2], "INVALID"), "INVALID"),
+#         'Mã nhóm': info.group_id,
+#         'Số tiết': NUMBER_OF_SESSION.get(info.subject_id, "INVALID"),
+#         'Mã GV': ClassDictGlobal[f"{info.subject_id}-{info.group_id}"].teacher_id,
+#         'Mã Phòng': None,
+#         'Loại Phòng': ROOM_TYPE_ID_REVERSE.get(info.room_type_id, "INVALID"),
+#         'Thứ': info.day,
+#         'Tiết BD': info.session_start,
+#     }
+#     for idx, bit in enumerate(info.weeks_bitstring):
+#         new_row[f"Week {idx + 1}"] = 'x' if bit == '1' else None
+#     data.append(new_row)
+#
+# # Create a DataFrame from the data
+# df = pd.DataFrame(data)
+# k = len(fixed_chromosome.chromosome)
+# df = df.style.apply(lambda x: ['background: lightblue' if i < k else '' for i in range(len(x))])
+# # Define the file path to save the Excel file
+# file_path = '/Users/twang/Documents/GitHub/Sched/BK-Calendar-Ver1-12.xlsx'
+#
+# # Write the DataFrame to an Excel file
+# df.to_excel(file_path, index=False)
+#
+# print("Excel file saved successfully.")
+#
+# # !cp /content/{file_path} /gdrive/MyDrive/HCMUT-Scheduling/
+#
+# """## Save as "Tham khảo HK231"
+# """
+#
+# import pandas as pd
+#
+# # Assuming data is a list of dictionaries where each dictionary represents a row of data
+# # Example:
+# data = []
+# for gen in population[0].chromosome:
+#     info = parse_gen(gen)
+#     new_row = {
+#         'f_malp': "",
+#         'f_mamh': info.subject_id,
+#         'f_tenmhvn': SUBJECT_ID_TO_NAME.get(info.subject_id, "INVALID"),
+#         'f_dvht': SUBJECT_INFO[info.subject_id]['f_dvht'],
+#         'f_ts': SUBJECT_INFO[info.subject_id]['f_ts'],
+#         'f_lt': SUBJECT_INFO[info.subject_id]['f_lt'],
+#         'f_bt': SUBJECT_INFO[info.subject_id]['f_bt'],
+#         'f_tn': SUBJECT_INFO[info.subject_id]['f_tn'],
+#         'f_btl': SUBJECT_INFO[info.subject_id]['f_btl'],
+#         'f_da': SUBJECT_INFO[info.subject_id]['f_da'],
+#         'f_la': SUBJECT_INFO[info.subject_id]['f_la'],
+#         'f_mh_mabm': None,
+#         'f_mh_tenbm': PROGRAM_ID_REVERSE.get(GROUP_ID_TO_PROGRAM_ID.get(info.group_id[:-2], "INVALID"), "INVALID"),
+#         'f_manh': info.group_id,
+#         'f_sosv': None,
+#         'f_sstb': 0,
+#         'f_succhua': ROOM_TYPE_ID_REVERSE.get(info.room_type_id, "INVALID"),
+#         'f_sosv1': None,
+#         'f_sodk': None,
+#         'f_tuan1': 0,
+#         'f_thu': {i: calendar.day_name[i] for i in range(7)}.get(info.day - 2, "INVALID"),
+#         'f_tietbd': info.session_start if NUMBER_OF_SESSION.get(info.subject_id,
+#                                                                 "INVALID") != "INVALID" and NUMBER_OF_SESSION.get(
+#             info.subject_id, "INVALID") + info.session_start in VALID_SESSION else "INVALID",
+#         'f_sotiet': NUMBER_OF_SESSION.get(info.subject_id, "INVALID"),
+#         'f_manv': None,
+#         'f_holotvn': None,
+#         'f_tenvn': None,
+#         'f_mabm': None,
+#         'f_tenbm': None,
+#         'f_tenph': None,
+#         'f_diadiem': FACILITY_ID[FACILITY[info.group_id[:-2]]],
+#         'f_mamh_lt': None,
+#         'f_makhoa': 'MT',
+#         'f_tenkhoa': 'KH & KT Máy tính',
+#         'f_manh_lt': None
+#     }
+#     for idx, bit in enumerate(info.weeks_bitstring):
+#         new_row[f"t{idx + 1}"] = 'x' if bit == '1' else None
+#     data.append(new_row)
+#
+# # Create a DataFrame from the data
+# df = pd.DataFrame(data)
+#
+# # Define the file path to save the Excel file
+# file_path = '/Users/vinhvu/Sched/TKB-241.xlsx'
+#
+# # Write the DataFrame to an Excel file
+# df.to_excel(file_path, index=False)
+#
+# print("Excel file saved successfully.")
+#
+# """# Appendix: Hyper parameters Number of room in each facility
+#
+# ```
+# # Param 1
+# NUMBER_OF_ROOM = { # '-'.join(facility, room_type_id) BK-DAn, BK-LTK
+#     "DAn-1": 30, # loại phòng 40 chỗ
+#     "DAn-2": 5, # loại phòng 60 chỗ
+#     "DAn-3": 20, # loại phòng 80 chỗ
+#     "DAn-4": 5, # loại phòng 140 chỗ
+#     "DAn-5": 3, # loại phòng 160 chỗ
+#     "DAn-6": 2, # loại phòng 200 chỗ (hội trường, 211H1)
+#
+#     "LTK-1": 30,
+#     "LTK-2": 5,
+#     "LTK-3": 20,
+#     "LTK-4": 5,
+#     "LTK-5": 3,
+#     "LTK-6": 2
+# }
+# # Param 2
+# NUMBER_OF_ROOM = { # '-'.join(facility, room_type_id) BK-DAn, BK-LTK
+#     "DAn-1": 30, # loại phòng 40 chỗ
+#     "DAn-2": 5, # loại phòng 60 chỗ
+#     "DAn-3": 10, # loại phòng 80 chỗ
+#     "DAn-4": 5, # loại phòng 140 chỗ
+#     "DAn-5": 3, # loại phòng 160 chỗ
+#     "DAn-6": 2, # loại phòng 200 chỗ (hội trường, 211H1)
+#
+#     "LTK-1": 30,
+#     "LTK-2": 5,
+#     "LTK-3": 10,
+#     "LTK-4": 5,
+#     "LTK-5": 3,
+#     "LTK-6": 2
+# }
+# ```
+#
+#
+#
+# ```
+# tracking_log dict_items([('total_invalid_cases', 0), ('invalid_day', 0), ('invalid_session_start', 0), ('invalid_room_type_id', 0), ('smaller_room', 0), ('overload_room_cases', 0)])
+#
+# ```
+#
+# ```
+# NUMBER_OF_ROOM = { # '-'.join(facility, room_type_id) BK-DAn, BK-LTK
+#     "DAn-1": 25, # loại phòng 40 chỗ
+#     "DAn-2": 10, # loại phòng 60 chỗ
+#     "DAn-3": 15, # loại phòng 80 chỗ
+#     "DAn-4": 5, # loại phòng 140 chỗ
+#     "DAn-5": 5, # loại phòng 160 chỗ
+#     "DAn-6": 5, # loại phòng 200 chỗ (hội trường, 211H1)
+#
+#     "LTK-1": 25,
+#     "LTK-2": 10,
+#     "LTK-3": 15,
+#     "LTK-4": 5,
+#     "LTK-5": 5,
+#     "LTK-6": 5
+# }
+# ```
+#
+#
+#
+# ```
+# tracking_log dict_items([('total_invalid_cases', 6), ('invalid_day', 1), ('invalid_session_start', 3), ('invalid_room_type_id', 2), ('smaller_room', 1), ('overload_room_cases', 0)])
+# ```
+#
+# ```
+# NUMBER_OF_ROOM = { # '-'.join(facility, room_type_id) BK-DAn, BK-LTK
+#     "DAn-1": 25, # loại phòng 40 chỗ
+#     "DAn-2": 10, # loại phòng 60 chỗ
+#     "DAn-3": 10, # loại phòng 80 chỗ
+#     "DAn-4": 5, # loại phòng 140 chỗ
+#     "DAn-5": 5, # loại phòng 160 chỗ
+#     "DAn-6": 5, # loại phòng 200 chỗ (hội trường, 211H1)
+#
+#     "LTK-1": 25,
+#     "LTK-2": 10,
+#     "LTK-3": 10,
+#     "LTK-4": 5,
+#     "LTK-5": 5,
+#     "LTK-6": 5
+# }
+# ```
+#
+#
+#
+# ```
+# tracking_log dict_items([('total_invalid_cases', 4), ('invalid_day', 1), ('invalid_session_start', 3), ('invalid_room_type_id', 0), ('smaller_room', 1), ('overload_room_cases', 1)])
+#
+#
+# ```
+#
+# ```
+# NUMBER_OF_ROOM = { # '-'.join(facility, room_type_id) BK-DAn, BK-LTK
+#     "DAn-1": 20, # loại phòng 40 chỗ
+#     "DAn-2": 15, # loại phòng 60 chỗ
+#     "DAn-3": 10, # loại phòng 80 chỗ
+#     "DAn-4": 5, # loại phòng 140 chỗ
+#     "DAn-5": 5, # loại phòng 160 chỗ
+#     "DAn-6": 5, # loại phòng 200 chỗ (hội trường, 211H1)
+#
+#     "LTK-1": 20,
+#     "LTK-2": 15,
+#     "LTK-3": 10,
+#     "LTK-4": 5,
+#     "LTK-5": 5,
+#     "LTK-6": 5
+# }
+# ```
+#
+#
+#
+# ```
+# tracking_log dict_items([('total_invalid_cases', 44), ('invalid_day', 10), ('invalid_session_start', 18), ('invalid_room_type_id', 17), ('smaller_room', 4), ('overload_room_cases', 3)])
+#
+# ```
+#
+# # Appendix: Visualize helper function
+# """
+#
+#
+# def visualize_calendar(chromosome):
+#     time_loc_dict = {}
+#     global_active = []
+#     keys_index = ['week', 'day', 'session_start', 'num_session', 'facility', 'room_type_id']
+#     for gen in chromosome.chromosome:
+#         info = parse_gen(gen)
+#
+#         facility = FACILITY[info.group_id[
+#                             :-2]]  # get value of key (L or CC or CN) because the 2 last letter is number of group liek 01, 02
+#         for idx, bit in enumerate(info.weeks_bitstring):
+#             if bit == '1':
+#                 _key = {
+#                     "week": idx + 1,
+#                     "day": info.day,
+#                     "session_start": info.session_start,
+#                     "num_session": NUMBER_OF_SESSION[info.subject_id],
+#                     "facility": facility,
+#                     "room_type_id": info.room_type_id
+#                 }
+#                 _key = tuple(list(_key.values()))
+#                 if _key in time_loc_dict:
+#                     time_loc_dict[_key] += [(info.subject_id, info.group_id)]
+#                 else:
+#                     time_loc_dict[_key] = [(info.subject_id, info.group_id)]
+#
+#                 global_active.append(_key)
+#
+#     sort_keys = ['week', 'facility', 'day', 'session_start', 'room_type_id']
+#     sort_keys = [keys_index.index(key) for key in sort_keys]
+#     sorted_global_active = sorted(global_active, key=lambda x: tuple(x[i] for i in sort_keys))
+#
+#     def add_key_name(key):
+#         week, day, session_start, num_session, facility, room_type_id = key
+#         day = {i: calendar.day_name[i] for i in range(7)}.get(day - 2)
+#         key = f"Week {week}|Facility BK-{facility}|{day}|Session {session_start}-{session_start + num_session}|Room Type {room_type_id}"
+#         return key
+#
+#     result = {add_key_name(key): time_loc_dict[key] for key in sorted_global_active}
+#     return result
+#
+#
+# visualize_calendar(population[0])
+#
+# import json
+#
+# with open("BK-Calendar.json", 'w') as json_file:
+#     json.dump(visualize_calendar(population[0]), json_file, indent=4)
