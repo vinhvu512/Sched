@@ -120,7 +120,7 @@ FIXED_SHEET_FILE_NAME = ["Dự kiến SVMT_241 (thầy Cường).xlsx"]  # sau n
 REFERENCE_SHEET_FILE_NAME = "final_TKB_update20230915.xlsx"  # file tham khảo từ 1 học kỳ trước. Ở đây là 231
 LAB_SHEET_FILE_NAME = "HK241_CSE_Xep TKB ThucHanh-ThiNghiem.xlsx"
 LAB_SHEET_NAMES = ['HK241 TKB LAB', 'CS1', 'CS2']
-SHEET_FILE_PATH = f"/Users/twang/Documents/GitHub/Sched/{SHEET_FILE_NAME}"
+SHEET_FILE_PATH = f"/Users/vinhvu/Sched/{SHEET_FILE_NAME}"
 SHEET_NAMES = ['Thống kê', 'Phản hồi', 'KHGD', 'Môn học', 'reference']  # 'reference' đại diện cho file HK231
 
 assert os.path.exists(SHEET_FILE_PATH)
@@ -190,7 +190,7 @@ PROGRAM_ID_REVERSE = {value: key for key, value in PROGRAM_ID.items()}
 
 ROOM_TYPE_ID = {
     30.0: "1",
-    39: "2",
+    39.0: "2",
     40.0: "3",
     60.0: "4",
     80.0: "5",
@@ -199,7 +199,31 @@ ROOM_TYPE_ID = {
     200.0: "8",
 }
 
+LAB_ROOM_TYPE_ID = {
+    30.0: "1",  #104-C6
+    30.1: "2",  #508-C6
+    30.2: "3",  #510-C6
+
+    39.0: "4",  #202-C5
+    39.1: "5",  #105-C6
+    39.2: "6",  #102-C6
+    39.3: "7",  #103-C6
+    39.4: "8",  #509-C6
+    39.5: "9",  #303-B9
+
+    40.1: "10",  #601-H6
+    40.2: "11",  #603-H6
+    40.3: "12",  #604-H6
+    40.4: "13",  #605-H6
+    40.5: "14",  #701-H6
+    40.6: "15",  #702-H6
+    40.7: "16",  #703-H6
+    40.8: "17",  #707-H6
+    40.9: "18",  #708-H6
+}
+
 ROOM_TYPE_ID_REVERSE = {val: key for key, val in ROOM_TYPE_ID.items()}
+LAB_ROOM_TYPE_ID_REVERSE = {val: key for key, val in LAB_ROOM_TYPE_ID.items()}
 
 # Lưu ý: đây là trường hợp cho kết quả tốt nhất (có lẽ vì phân phối của phòng tương đương với ```data0['Sỉ số SV max'].value_counts()``` bên trên)
 # Với số phòng nhỏ hơn, GA ko hội tụ. Do đó cần cung cấp số liệu chính xác hoặc GA cải tiến đa mục tiêu
@@ -222,6 +246,46 @@ NUMBER_OF_ROOM = {  # '-'.join(facility, room_type_id) BK-DAn, BK-LTK
     "LTK-6": 15,
     "LTK-7": 15,
     "LTK-8": 10,
+}
+
+NUMBER_OF_ROOM_LAB = {
+    "DA-1": 0,
+    "DA-2": 0,
+    "DA-3": 0,
+    "DA-4": 0,
+    "DA-5": 0,
+    "DA-6": 0,
+    "DA-7": 0,
+    "DA-8": 0,
+    "DA-9": 0,
+    "DA-10": 1,
+    "DA-11": 1,
+    "DA-12": 1,
+    "DA-13": 1,
+    "DA-14": 1,
+    "DA-15": 1,
+    "DA-16": 1,
+    "DA-17": 1,
+    "DA-18": 1,
+
+    "LTK-1": 1,
+    "LTK-2": 1,
+    "LTK-3": 1,
+    "LTK-4": 1,
+    "LTK-5": 1,
+    "LTK-6": 1,
+    "LTK-7": 1,
+    "LTK-8": 1,
+    "LTK-9": 1,
+    "LTK-10": 0,
+    "LTK-11": 0,
+    "LTK-12": 0,
+    "LTK-13": 0,
+    "LTK-14": 0,
+    "LTK-15": 0,
+    "LTK-16": 0,
+    "LTK-17": 0,
+    "LTK-18": 0,
 }
 
 FACILITY_ID = {
@@ -273,6 +337,7 @@ VI_TO_EN_COLUMN_NAMES = {
     'f_manv': 'teacher_id',
     'f_thu': 'day',
     'f_tietbd': 'session_start',
+    'f_tenph': 'room_name',
 }
 
 MIDTERM_ALL = 8
@@ -313,7 +378,7 @@ def preprocess_raw_data(df, sheet_name):
         # df = df[df['num_session'] != 0]
     elif sheet_name == 'reference':
         list_weeks = [t for t in df.columns if t[0] == 't' and t[1:].isdigit() and int(t[1:]) <= 18]
-        select_columns = ['subject_id', 'group_id', 'num_session', 'teacher_id', 'day', 'session_start']
+        select_columns = ['subject_id', 'group_id', 'num_session', 'teacher_id', 'day', 'session_start', 'room_name']
         select_columns += list_weeks
         df = df[select_columns]
         df = df.rename(columns={t: t.upper() for t in list_weeks}, inplace=False)
@@ -346,6 +411,11 @@ df0.merge(df3, on='subject_id').groupby(['num_session'])['num_of_group'].sum()
 
 df4 = preprocess_raw_data(data4, SHEET_NAMES[1])
 df4
+
+df0.to_csv('/Users/vinhvu/Sched/df0_preprocessed.csv', index=False)
+df3.to_csv('/Users/vinhvu/Sched/df3_preprocessed.csv', index=False)
+df4.to_csv('/Users/vinhvu/Sched/df4_preprocessed.csv', index=False)
+ref_df.to_csv('/Users/vinhvu/Sched/refdf_preprocessed.csv', index=False)
 
 """## Cache Variables"""
 
@@ -562,11 +632,13 @@ fixed_chromosome = CHROMOSOME_GA_FIXED(df4)
 display(fixed_chromosome.chromosome)
 print(len(fixed_chromosome.chromosome))
 # Tiếp tục là 1 file đề xuất khác (ở đây là chính file tham khảo)
-remain_df0 = fixed_chromosome.add(ref_df, df0)
+fixed_chromosome_231 = deepcopy(fixed_chromosome)
+remain_df0 = fixed_chromosome_231.add(ref_df, df0)
 # Số lớp của file dự kiến được cập nhật
 display(remain_df0)
-display(fixed_chromosome.chromosome)
-print(len(fixed_chromosome.chromosome))
+display(fixed_chromosome_231.chromosome)
+print(len(fixed_chromosome_231.chromosome))
+remain_df0.to_csv('/Users/vinhvu/Sched/remain_df0.csv', index=False)
 
 """## Chromosome GA"""
 
@@ -637,22 +709,19 @@ class CHROMOSOME_GA(CHROMOSOME_GA_BASE):
         else:  # môn thí nghiệm
             # TODO: tính toán sau, bên dưới chỉ đề đỡ
             # 6 bit đầu là 0, 12 bit sau sẽ là K số 1 random xen kẽ
-            bitstring = '0' * 6
-            remaining_bits = MAX_ACTIVE_WEEKS - 6
-            ones_to_place = K
+            bitstring = '0' * 5
+            remaining_bits = MAX_ACTIVE_WEEKS - 5
 
             bit_list = ['0'] * (remaining_bits)
 
             # Place ones randomly in the remaining 12 bits
-            available_positions = list(range(remaining_bits))
-            random.shuffle(available_positions)
-            ones_positions = sorted(available_positions[:K])
-
-            for pos in ones_positions:
-                bit_list[pos] = '1'
+            for i in range(random.choice([0, 1]), remaining_bits, 2):
+                if K > 0:
+                    bit_list[i] = '1'
+                    K -= 1
 
             # Convert list back to string
-            bitstring += ''.join(bit_list[:12])
+            bitstring += ''.join(bit_list[:13])
 
             return bitstring
 
@@ -1295,19 +1364,31 @@ def get_all_constraints() -> list:
 
 def repair_room_type_id(gen):
     info = parse_gen(gen)
-    # print(info.room_type_id)
-    if 'tn' in SUBJECT_ID_TO_NAME.get(info.subject_id) and info.room_type_id not in ["1", "2"]:
+    if '(tn)' in SUBJECT_ID_TO_NAME.get(info.subject_id) and info.room_type_id not in ["1", "2"]:
         room_type_id = random.choice(["1", "2"])  # Chọn ngẫu nhiên giữa "1" và "2"
         new_bitstring = format(info.day, "03b") + format(info.session_start, "04b") + format(int(room_type_id),
                                                                                              "03b") + info.weeks_bitstring
         new_gen = "-".join([info.subject_id, info.group_id, new_bitstring])
         return new_gen
-    if info.room_type_id not in VALID_ROOM_TYPE_ID:
-        room_type_id = "1"  # Default to "1" cho các trường hợp khác
+    if '(tn)' not in SUBJECT_ID_TO_NAME.get(info.subject_id) and info.room_type_id not in [str(r) for r in range(3, 9)]:
+        room_type_id = random.choice([str(r) for r in range(3, 9)])
         new_bitstring = format(info.day, "03b") + format(info.session_start, "04b") + format(int(room_type_id),
                                                                                              "03b") + info.weeks_bitstring
         new_gen = "-".join([info.subject_id, info.group_id, new_bitstring])
-    # info = parse_gen(new_gen)
+        return new_gen
+    if info.room_type_id not in VALID_ROOM_TYPE_ID:
+        if '(tn)' in SUBJECT_ID_TO_NAME.get(info.subject_id):
+            room_type_id = random.choice(["1", "2"])  # Chọn ngẫu nhiên giữa "1" và "2"
+            new_bitstring = format(info.day, "03b") + format(info.session_start, "04b") + format(int(room_type_id),
+                                                                                                 "03b") + info.weeks_bitstring
+            new_gen = "-".join([info.subject_id, info.group_id, new_bitstring])
+            return new_gen
+        if '(tn)' not in SUBJECT_ID_TO_NAME.get(info.subject_id):
+            room_type_id = random.choice([str(r) for r in range(3, 9)])
+            new_bitstring = format(info.day, "03b") + format(info.session_start, "04b") + format(int(room_type_id),
+                                                                                                 "03b") + info.weeks_bitstring
+            new_gen = "-".join([info.subject_id, info.group_id, new_bitstring])
+            return new_gen
     return gen
 
 
@@ -1375,6 +1456,12 @@ def merge_with_fixed_chromosome(chromosome):
     global fixed_chromosome
     merged_chromosome = deepcopy(chromosome)
     merged_chromosome.chromosome = np.concatenate((fixed_chromosome.chromosome, merged_chromosome.chromosome))
+    return merged_chromosome
+
+def merge_with_fixed_chromosome_and231(chromosome):
+    global fixed_chromosome_231
+    merged_chromosome = deepcopy(chromosome)
+    merged_chromosome.chromosome = np.concatenate((fixed_chromosome_231.chromosome, merged_chromosome.chromosome))
     return merged_chromosome
 
 
@@ -1488,7 +1575,7 @@ def train_ga_with_strategies(data0, data1, num_generations=100, population_size=
 # Call the train_ga_with_strategies function with appropriate parameters
 best_chromosome, global_logging = train_ga_with_strategies(
     df0, df3,
-    num_generations=1000,  # Tăng số thế hệ
+    num_generations=100,  # Tăng số thế hệ
     population_size=150,  # Tăng kích thước quần thể
     elitism_size=20,  # Tăng kích thước elitism
     mating_rate=0.8,  # Tăng tỉ lệ phối giống
@@ -1496,7 +1583,7 @@ best_chromosome, global_logging = train_ga_with_strategies(
     base_mutation_rate=0.2,  # Sử dụng tỉ lệ đột biến thích nghi
     restart_threshold=50  # Sử dụng chiến lược khởi tạo lại định kỳ
 )
-tracking_result = tracking_chromosome_fitness(merge_with_fixed_chromosome(best_chromosome))
+tracking_result = tracking_chromosome_fitness(best_chromosome)
 print(tracking_result)
 lab_error_cases = {key: value for key, value in tracking_result['error_cases'].items() if 'lab' in key}
 
@@ -1559,12 +1646,50 @@ plot_fitness(global_logging)
 """## Save as "Phản hồi"
 """
 
+
+def generate_room_assignment(subject_id, room_dict):
+    possible_rooms = [room for room, subjects in room_dict.items() if subject_id in subjects]
+    assigned_rooms = random.sample(possible_rooms, min(len(possible_rooms), len(subject_id)))
+    return assigned_rooms
+
+
+# Cập nhật DataFrame với phòng học ngẫu nhiên
+def update_room_assignment(df):
+    room_assignments_cc_cn = defaultdict(list)
+    room_assignments_l = defaultdict(list)
+
+    # Tạo danh sách phòng học cho CC, CN và L
+    for subject_id in df['Mã môn học'].unique():
+        room_assignments_cc_cn[subject_id] = generate_room_assignment(subject_id, lab_room_cc_cn)
+        room_assignments_l[subject_id] = generate_room_assignment(subject_id, lab_room_l)
+
+    room_index = defaultdict(int)
+    for index, row in df.iterrows():
+        subject_id = row['Mã môn học']
+        group_id = row['Mã nhóm']
+        if group_id.startswith('CC') or group_id.startswith('CN'):
+            assigned_rooms = room_assignments_cc_cn[subject_id]
+        elif group_id.startswith('L'):
+            assigned_rooms = room_assignments_l[subject_id]
+        else:
+            assigned_rooms = []
+
+        room_count = len(assigned_rooms)
+        if room_count == 0:
+            df.at[index, 'Mã Phòng'] = None
+        else:
+            df.at[index, 'Mã Phòng'] = assigned_rooms[room_index[subject_id] % room_count]
+            room_index[subject_id] += 1
+
+    return df
+
+
 import pandas as pd
 
 # Assuming data is a list of dictionaries where each dictionary represents a row of data
 # Example:
 data = []
-for gen in merge_with_fixed_chromosome(best_chromosome).chromosome:
+for gen in merge_with_fixed_chromosome_and231(best_chromosome).chromosome:
     info = parse_gen(gen)
     new_row = {
         'Mã môn học': info.subject_id,
@@ -1572,7 +1697,7 @@ for gen in merge_with_fixed_chromosome(best_chromosome).chromosome:
         'Loại hình lớp': PROGRAM_ID_REVERSE.get(GROUP_ID_TO_PROGRAM_ID.get(info.group_id[:-2], "INVALID"), "INVALID"),
         'Mã nhóm': info.group_id,
         'Số tiết': NUMBER_OF_SESSION.get(info.subject_id, "INVALID"),
-        'Mã GV': ClassDictGlobal[f"{info.subject_id}-{info.group_id}"].teacher_id,
+        'Mã GV': None,
         'Mã Phòng': None,
         'Loại Phòng': ROOM_TYPE_ID_REVERSE.get(info.room_type_id, "INVALID"),
         'Thứ': info.day,
@@ -1584,10 +1709,11 @@ for gen in merge_with_fixed_chromosome(best_chromosome).chromosome:
 
 # Create a DataFrame from the data
 df = pd.DataFrame(data)
+df = update_room_assignment(df)
 k = len(fixed_chromosome.chromosome)
 df = df.style.apply(lambda x: ['background: lightblue' if i < k else '' for i in range(len(x))])
 # Define the file path to save the Excel file
-file_path = '/Users/twang/Documents/GitHub/Sched/BK-Calendar-Ver1-12.xlsx'
+file_path = '/Users/vinhvu/Sched/BK-Calendar-Ver1-12.xlsx'
 
 # Write the DataFrame to an Excel file
 df.to_excel(file_path, index=False)
@@ -1652,7 +1778,7 @@ for gen in best_chromosome.chromosome:
 df = pd.DataFrame(data)
 
 # Define the file path to save the Excel file
-file_path = '/Users/twang/Documents/GitHub/Sched/TKB-241.xlsx'
+file_path = '/Users/vinhvu/Sched/TKB-241.xlsx'
 
 # Write the DataFrame to an Excel file
 df.to_excel(file_path, index=False)
