@@ -120,7 +120,7 @@ FIXED_SHEET_FILE_NAME = ["Dự kiến SVMT_241 (thầy Cường).xlsx"]  # sau n
 REFERENCE_SHEET_FILE_NAME = "final_TKB_update20230915.xlsx"  # file tham khảo từ 1 học kỳ trước. Ở đây là 231
 LAB_SHEET_FILE_NAME = "HK241_CSE_Xep TKB ThucHanh-ThiNghiem.xlsx"
 LAB_SHEET_NAMES = ['HK241 TKB LAB', 'CS1', 'CS2']
-SHEET_FILE_PATH = f"/Users/vinhvu/Sched/{SHEET_FILE_NAME}"
+SHEET_FILE_PATH = f"/Users/twang/Documents/GitHub/Sched/{SHEET_FILE_NAME}"
 SHEET_NAMES = ['Thống kê', 'Phản hồi', 'KHGD', 'Môn học', 'reference']  # 'reference' đại diện cho file HK231
 
 assert os.path.exists(SHEET_FILE_PATH)
@@ -151,8 +151,8 @@ data0.groupby(['Sỉ số SV max', 'Loại hình lớp'])['Số lượng nhóm']
 
 ref_data = pd.read_excel(REFERENCE_SHEET_FILE_NAME)
 # Lọc của khoa máy tính & không phải thí nghiệm
-ref_data = ref_data[(ref_data['f_makhoa'] == 'MT')]
-ref_data
+# ref_data = ref_data[(ref_data['f_makhoa'] == 'MT')]
+# ref_data
 
 
 # Một số môn ở học kỳ này bị split thời khoa biểu, do đó cần merge lại
@@ -322,6 +322,13 @@ def preprocess_raw_data(df, sheet_name):
         df['program'] = df['group_id'].apply(lambda x: GROUP_ID_TO_PROGRAM_ID.get(x[:-2]))
         df = df[(df['day'] != 0) & (df['session_start'] != 0)]
     return df
+
+# data0.to_csv('/Users/twang/Documents/GitHub/Sched/preprocessed/df0-non.csv', index=False)
+# data3.to_csv('/Users/twang/Documents/GitHub/Sched/preprocessed/df3-non.csv', index=False)
+# data4.to_csv('/Users/twang/Documents/GitHub/Sched/preprocessed/df4-non.csv', index=False)
+# ref_data.to_csv('/Users/twang/Documents/GitHub/Sched/preprocessed/refdf-non_preprocessed.csv', index=False)
+
+
 
 
 ref_df = preprocess_raw_data(ref_data, "reference")
@@ -546,6 +553,10 @@ class CHROMOSOME_GA_FIXED(CHROMOSOME_GA_BASE):
 
 # Hiển thị file dự kiến ban đâu
 display(df0)
+# df0.to_csv('/Users/twang/Documents/GitHub/Sched/preprocessed/df0_preprocessed.csv', index=False)
+# df3.to_csv('/Users/twang/Documents/GitHub/Sched/preprocessed/df3_preprocessed.csv', index=False)
+# df4.to_csv('/Users/twang/Documents/GitHub/Sched/preprocessed/df4_preprocessed.csv', index=False)
+# ref_df.to_csv('/Users/twang/Documents/GitHub/Sched/preprocessed/refdf_preprocessed.csv', index=False)
 # Sau khi fix 1 file đề xuất đầu tiên
 fixed_chromosome = CHROMOSOME_GA_FIXED(df4)
 display(fixed_chromosome.chromosome)
@@ -702,7 +713,14 @@ ClassDictGlobal
 
 """# GA Algorithm"""
 
-
+def repair_day(gen):
+    info = parse_gen(gen)
+    if info.day not in VALID_DAY:
+        day = random.choice(VALID_DAY)
+        new_bitstring = format(day, "03b") + format(info.session_start, "04b") + format(int(info.room_type_id), "03b") + info.weeks_bitstring
+        new_gen = "-".join([info.subject_id, info.group_id, new_bitstring])
+        return new_gen
+    return gen
 def repair_room_type_id(gen):
     info = parse_gen(gen)
     if '(tn)' in SUBJECT_ID_TO_NAME.get(info.subject_id) and info.room_type_id not in ["1", "2"]:
@@ -737,7 +755,7 @@ def repair_room_type_id(gen):
 def repair_population(population):
     for ind in population:
         for idx_gen, gen in enumerate(ind.chromosome):
-            ind.chromosome[idx_gen] = repair_room_type_id(gen)
+            ind.chromosome[idx_gen] = repair_day(repair_room_type_id(gen))
     return population
 
 
@@ -781,8 +799,8 @@ def crossover(parents, lower_threshold=[0.3, 0.1, 0.5, 0.3]):
             else:
                 offspring_1 += bitstring_1[s:e]
                 offspring_2 += bitstring_2[s:e]
-        child_1.chromosome[chromosome_swap_index] = np.str_(repair_room_type_id(offspring_1))
-        child_2.chromosome[chromosome_swap_index] = np.str_(repair_room_type_id(offspring_2))
+        child_1.chromosome[chromosome_swap_index] = np.str_(repair_day(repair_room_type_id(offspring_1)))
+        child_2.chromosome[chromosome_swap_index] = np.str_(repair_day(repair_room_type_id(offspring_2)))
         offsprings.append(child_1)
         offsprings.append(child_2)
     return np.array(offsprings)
@@ -928,7 +946,7 @@ class InvalidRoomTypeIdConstraint(ConstraintBase):
         for idx, gen in enumerate(chromosome.chromosome):
             info = parse_gen(gen)
             if "(tn)" in info.subject_id and info.room_type_id not in ["1", "2"]:
-                self._logging['invalid_room_type_id_cases'] += 9999999999999999999
+                self._logging['invalid_room_type_id_cases'] += 99999999999
                 ConstraintBase.InvalidIndices.append(idx)
             if info.room_type_id not in VALID_ROOM_TYPE_ID:
                 self._logging['invalid_room_type_id_cases'] += 1
@@ -1188,6 +1206,83 @@ class MidTermOccurConstraint(ConstraintBase):
         return sum(self._logging.values()) * self.penalty
 
 
+lab_room_cc_cn = {
+    "102-C6": ["CO3094", "CO2014", "CO2004", "CO2018", "CO1006"],
+    "103-C6": ["CO3094", "CO2014", "CO2004", "CO2018", "CO1006"],
+    "104-C6": ["CO3094", "CO2014", "CO2004", "CO2018", "CO1006"],
+    "509-C6": ["CO3094", "CO2014", "CO2004", "CO2018", "CO1006"],
+    "202-C5": ["CO2008", "CO1024", "CO3010", "CO2038"],
+    "105-C6": ["CO3054", "CO1024", "CO3010", "CO2038"]
+}
+
+lab_room_l = {
+    "701-H6": ["CO2014", "CO2004", "CO2018", "CO1006"],
+    "702-H6": ["CO2014", "CO2004", "CO2018", "CO1006"],
+    "703-H6": ["CO2014", "CO2004", "CO2018", "CO1006"],
+    "707-H6": ["CO2014", "CO2004", "CO2018", "CO1006"],
+    "603-H6": ["CO2014", "CO2004", "CO2018", "CO1006"],
+    "604-H6": ["CO2014", "CO2004", "CO2018", "CO1006"],
+    "601-H6": ["CO2008", "CO3054", "CO3010", "CO1024", "CO2038"],
+    "605-H6": ["CO1024", "CO2038"],
+    "105-C6": ["CO3054"]
+}
+
+class LabRoomConstraint(ConstraintBase):
+    def __init__(self):
+        super().__init__("Lab Invalid Room", ConstraintTypeHard())
+        self.active = True
+        self._logging = defaultdict(int)
+        self.vars_depend = "lab"
+        self.penalty = 50
+        self.lab_room_dict_cc_cn = self.create_lab_room_dict(lab_room_cc_cn)
+        self.lab_room_dict_l = self.create_lab_room_dict(lab_room_l)
+
+    def create_lab_room_dict(self, lab_room):
+        lab_room_dict = defaultdict(list)
+        for room, subject_codes in lab_room.items():
+            for subject_code in subject_codes:
+                lab_room_dict[subject_code].append(room)
+        return lab_room_dict
+
+    def __call__(self, chromosome):
+        day_sessions = defaultdict(lambda: defaultdict(lambda: defaultdict(list)))
+        for idx, gen in enumerate(chromosome.chromosome):
+            info = parse_gen(gen)
+            if "tn" in SUBJECT_ID_TO_NAME.get(info.subject_id, "").lower():
+                group_type = info.group_id[:2]  # Giả sử "CC" hoặc "CN" hoặc "L" nằm ở đầu
+                day_sessions[group_type][info.day][info.session_start].append(info.subject_id)
+
+        for group_type, days in day_sessions.items():
+            for day, sessions in days.items():
+                for session_start, subjects in sessions.items():
+                    if group_type in ["CC", "CN"]:
+                        self.check_lab_rooms(subjects, self.lab_room_dict_cc_cn, group_type, day, session_start)
+                    elif group_type == "L":
+                        self.check_lab_rooms(subjects, self.lab_room_dict_l, group_type, day, session_start)
+                    else:
+                        # Handle other group types if necessary
+                        pass
+
+        return self._logging
+
+    def check_lab_rooms(self, subjects, lab_room_dict, group_type, day, session_start):
+        rooms_used = defaultdict(int)
+        for subject in subjects:
+            if subject in lab_room_dict:
+                for room in lab_room_dict[subject]:
+                    rooms_used[room] += 1
+
+        for room, count in rooms_used.items():
+            if count > 1:
+                self._logging[f'invalid_lab_room_group_{group_type}_day_{day}_session_{session_start}'] += 1
+
+    @property
+    def fitness(self):
+        return sum(self._logging.values()) * self.penalty
+
+
+
+
 """### Constraints Manager"""
 
 
@@ -1296,7 +1391,7 @@ def adaptive_mutation(population, base_mutation_rate, generation, max_generation
     offsprings = mutation(population, mutation_rate)
     for idx, ind in enumerate(offsprings):
         for idx_gen, gen in enumerate(ind.chromosome):
-            ind.chromosome[idx_gen] = repair_room_type_id(gen)
+            ind.chromosome[idx_gen] = repair_day(repair_room_type_id(gen))
     return offsprings
 
 
@@ -1393,9 +1488,9 @@ def train_ga_with_strategies(data0, data1, num_generations=100, population_size=
 # Call the train_ga_with_strategies function with appropriate parameters
 best_chromosome, global_logging = train_ga_with_strategies(
     df0, df3,
-    num_generations=200,  # Tăng số thế hệ
-    population_size=300,  # Tăng kích thước quần thể
-    elitism_size=50,  # Tăng kích thước elitism
+    num_generations=1000,  # Tăng số thế hệ
+    population_size=150,  # Tăng kích thước quần thể
+    elitism_size=20,  # Tăng kích thước elitism
     mating_rate=0.8,  # Tăng tỉ lệ phối giống
     crossover_rate=0.9,  # Tăng tỉ lệ lai ghép
     base_mutation_rate=0.2,  # Sử dụng tỉ lệ đột biến thích nghi
@@ -1403,6 +1498,16 @@ best_chromosome, global_logging = train_ga_with_strategies(
 )
 tracking_result = tracking_chromosome_fitness(merge_with_fixed_chromosome(best_chromosome))
 print(tracking_result)
+lab_error_cases = {key: value for key, value in tracking_result['error_cases'].items() if 'lab' in key}
+
+# In ra các lỗi liên quan đến lab
+for key, value in lab_error_cases.items():
+    print(f"{key}: {value}")
+import numpy as np
+import random
+from collections import defaultdict
+from tqdm import tqdm
+import matplotlib.pyplot as plt
 
 
 def plot_fitness(global_logging):
@@ -1482,7 +1587,7 @@ df = pd.DataFrame(data)
 k = len(fixed_chromosome.chromosome)
 df = df.style.apply(lambda x: ['background: lightblue' if i < k else '' for i in range(len(x))])
 # Define the file path to save the Excel file
-file_path = '/Users/vinhvu/Sched/BK-Calendar-Ver1-12.xlsx'
+file_path = '/Users/twang/Documents/GitHub/Sched/BK-Calendar-Ver1-12.xlsx'
 
 # Write the DataFrame to an Excel file
 df.to_excel(file_path, index=False)
@@ -1547,7 +1652,7 @@ for gen in best_chromosome.chromosome:
 df = pd.DataFrame(data)
 
 # Define the file path to save the Excel file
-file_path = '/Users/vinhvu/Sched/TKB-241.xlsx'
+file_path = '/Users/twang/Documents/GitHub/Sched/TKB-241.xlsx'
 
 # Write the DataFrame to an Excel file
 df.to_excel(file_path, index=False)
