@@ -120,7 +120,7 @@ FIXED_SHEET_FILE_NAME = ["Dự kiến SVMT_241 (thầy Cường).xlsx"]  # sau n
 REFERENCE_SHEET_FILE_NAME = "final_TKB_update20230915.xlsx"  # file tham khảo từ 1 học kỳ trước. Ở đây là 231
 LAB_SHEET_FILE_NAME = "HK241_CSE_Xep TKB ThucHanh-ThiNghiem.xlsx"
 LAB_SHEET_NAMES = ['HK241 TKB LAB', 'CS1', 'CS2']
-SHEET_FILE_PATH = f"/Users/vinhvu/Sched/{SHEET_FILE_NAME}"
+SHEET_FILE_PATH = f"/Users/twang/Documents/GitHub/Sched/{SHEET_FILE_NAME}"
 SHEET_NAMES = ['Thống kê', 'Phản hồi', 'KHGD', 'Môn học', 'reference']  # 'reference' đại diện cho file HK231
 
 assert os.path.exists(SHEET_FILE_PATH)
@@ -412,10 +412,10 @@ df0.merge(df3, on='subject_id').groupby(['num_session'])['num_of_group'].sum()
 df4 = preprocess_raw_data(data4, SHEET_NAMES[1])
 df4
 
-df0.to_csv('/Users/vinhvu/Sched/df0_preprocessed.csv', index=False)
-df3.to_csv('/Users/vinhvu/Sched/df3_preprocessed.csv', index=False)
-df4.to_csv('/Users/vinhvu/Sched/df4_preprocessed.csv', index=False)
-ref_df.to_csv('/Users/vinhvu/Sched/refdf_preprocessed.csv', index=False)
+# df0.to_csv('/Users/vinhvu/Sched/df0_preprocessed.csv', index=False)
+# df3.to_csv('/Users/vinhvu/Sched/df3_preprocessed.csv', index=False)
+# df4.to_csv('/Users/vinhvu/Sched/df4_preprocessed.csv', index=False)
+# ref_df.to_csv('/Users/vinhvu/Sched/refdf_preprocessed.csv', index=False)
 
 """## Cache Variables"""
 
@@ -638,7 +638,7 @@ remain_df0 = fixed_chromosome_231.add(ref_df, df0)
 display(remain_df0)
 display(fixed_chromosome_231.chromosome)
 print(len(fixed_chromosome_231.chromosome))
-remain_df0.to_csv('/Users/vinhvu/Sched/remain_df0.csv', index=False)
+# remain_df0.to_csv('/Users/vinhvu/Sched/remain_df0.csv', index=False)
 
 """## Chromosome GA"""
 
@@ -1008,7 +1008,7 @@ class InvalidRoomTypeIdConstraint(ConstraintBase):
         super().__init__("Invalid Room Type Id", ConstraintTypeHard())
         self.active = True
         self._logging = defaultdict(int)
-        self.invalid_room_type_id_cases = 0
+        self.invalid_room_type_id_cases = 10
         self.vars_depend = "room_type_id"
 
     def __call__(self, chromosome):
@@ -1293,7 +1293,7 @@ lab_room_l = {
     "604-H6": ["CO2014", "CO2004", "CO2018", "CO1006"],
     "601-H6": ["CO2008", "CO3054", "CO3010", "CO1024", "CO2038"],
     "605-H6": ["CO1024", "CO2038"],
-    "105-C6": ["CO3054"]
+    "708-H6": ["CO3094"],
 }
 
 class LabRoomConstraint(ConstraintBase):
@@ -1302,7 +1302,7 @@ class LabRoomConstraint(ConstraintBase):
         self.active = True
         self._logging = defaultdict(int)
         self.vars_depend = "lab"
-        self.penalty = 50
+        self.penalty = 500  # Tăng hệ số phạt cho ràng buộc phòng thí nghiệm
         self.lab_room_dict_cc_cn = self.create_lab_room_dict(lab_room_cc_cn)
         self.lab_room_dict_l = self.create_lab_room_dict(lab_room_l)
 
@@ -1344,10 +1344,13 @@ class LabRoomConstraint(ConstraintBase):
         for room, count in rooms_used.items():
             if count > 1:
                 self._logging[f'invalid_lab_room_group_{group_type}_day_{day}_session_{session_start}'] += 1
+                # Ghi nhật ký chi tiết
+                print(f"Violation found: {group_type} on day {day} at session {session_start} in room {room} with count {count}")
 
     @property
     def fitness(self):
         return sum(self._logging.values()) * self.penalty
+
 
 
 
@@ -1649,12 +1652,12 @@ plot_fitness(global_logging)
 
 def generate_room_assignment(subject_id, room_dict):
     possible_rooms = [room for room, subjects in room_dict.items() if subject_id in subjects]
+    if not possible_rooms:
+        print(f"No possible rooms found for subject_id: {subject_id}")
     assigned_rooms = random.sample(possible_rooms, min(len(possible_rooms), len(subject_id)))
     return assigned_rooms
 
-
-# Cập nhật DataFrame với phòng học ngẫu nhiên
-def update_room_assignment(df):
+def update_room_assignment(df, start_index=0):
     room_assignments_cc_cn = defaultdict(list)
     room_assignments_l = defaultdict(list)
 
@@ -1664,7 +1667,7 @@ def update_room_assignment(df):
         room_assignments_l[subject_id] = generate_room_assignment(subject_id, lab_room_l)
 
     room_index = defaultdict(int)
-    for index, row in df.iterrows():
+    for index, row in df.iloc[start_index:].iterrows():
         subject_id = row['Mã môn học']
         group_id = row['Mã nhóm']
         if group_id.startswith('CC') or group_id.startswith('CN'):
@@ -1676,15 +1679,13 @@ def update_room_assignment(df):
 
         room_count = len(assigned_rooms)
         if room_count == 0:
+            print(f"No rooms assigned for subject_id: {subject_id}, group_id: {group_id}")
             df.at[index, 'Mã Phòng'] = None
         else:
             df.at[index, 'Mã Phòng'] = assigned_rooms[room_index[subject_id] % room_count]
             room_index[subject_id] += 1
 
     return df
-
-
-import pandas as pd
 
 # Assuming data is a list of dictionaries where each dictionary represents a row of data
 # Example:
@@ -1709,11 +1710,15 @@ for gen in merge_with_fixed_chromosome_and231(best_chromosome).chromosome:
 
 # Create a DataFrame from the data
 df = pd.DataFrame(data)
-df = update_room_assignment(df)
+
+# Update room assignment from row 211 onwards
+start_index = 211
+df = update_room_assignment(df, start_index)
+
 k = len(fixed_chromosome.chromosome)
 df = df.style.apply(lambda x: ['background: lightblue' if i < k else '' for i in range(len(x))])
 # Define the file path to save the Excel file
-file_path = '/Users/vinhvu/Sched/BK-Calendar-Ver1-12.xlsx'
+file_path = '/Users/twang/Documents/GitHub/Sched/BK-Calendar-Ver2.5.xlsx'
 
 # Write the DataFrame to an Excel file
 df.to_excel(file_path, index=False)
@@ -1725,65 +1730,65 @@ print("Excel file saved successfully.")
 # """## Save as "Tham khảo HK231"
 # """
 
-import pandas as pd
-
-# Assuming data is a list of dictionaries where each dictionary represents a row of data
-# Example:
-data = []
-for gen in best_chromosome.chromosome:
-    info = parse_gen(gen)
-    new_row = {
-        'f_malp': "",
-        'f_mamh': info.subject_id,
-        'f_tenmhvn': SUBJECT_ID_TO_NAME.get(info.subject_id, "INVALID"),
-        'f_dvht': SUBJECT_INFO[info.subject_id]['f_dvht'],
-        'f_ts': SUBJECT_INFO[info.subject_id]['f_ts'],
-        'f_lt': SUBJECT_INFO[info.subject_id]['f_lt'],
-        'f_bt': SUBJECT_INFO[info.subject_id]['f_bt'],
-        'f_tn': SUBJECT_INFO[info.subject_id]['f_tn'],
-        'f_btl': SUBJECT_INFO[info.subject_id]['f_btl'],
-        'f_da': SUBJECT_INFO[info.subject_id]['f_da'],
-        'f_la': SUBJECT_INFO[info.subject_id]['f_la'],
-        'f_mh_mabm': None,
-        'f_mh_tenbm': PROGRAM_ID_REVERSE.get(GROUP_ID_TO_PROGRAM_ID.get(info.group_id[:-2], "INVALID"), "INVALID"),
-        'f_manh': info.group_id,
-        'f_sosv': None,
-        'f_sstb': 0,
-        'f_succhua': ROOM_TYPE_ID_REVERSE.get(info.room_type_id, "INVALID"),
-        'f_sosv1': None,
-        'f_sodk': None,
-        'f_tuan1': 0,
-        'f_thu': {i: calendar.day_name[i] for i in range(7)}.get(info.day - 2, "INVALID"),
-        'f_tietbd': info.session_start if NUMBER_OF_SESSION.get(info.subject_id,
-                                                                "INVALID") != "INVALID" and NUMBER_OF_SESSION.get(
-            info.subject_id, "INVALID") + info.session_start in VALID_SESSION else "INVALID",
-        'f_sotiet': NUMBER_OF_SESSION.get(info.subject_id, "INVALID"),
-        'f_manv': None,
-        'f_holotvn': None,
-        'f_tenvn': None,
-        'f_mabm': None,
-        'f_tenbm': None,
-        'f_tenph': None,
-        'f_diadiem': FACILITY_ID[FACILITY[info.group_id[:-2]]],
-        'f_mamh_lt': None,
-        'f_makhoa': 'MT',
-        'f_tenkhoa': 'KH & KT Máy tính',
-        'f_manh_lt': None
-    }
-    for idx, bit in enumerate(info.weeks_bitstring):
-        new_row[f"t{idx + 1}"] = 'x' if bit == '1' else None
-    data.append(new_row)
-
-# Create a DataFrame from the data
-df = pd.DataFrame(data)
-
-# Define the file path to save the Excel file
-file_path = '/Users/vinhvu/Sched/TKB-241.xlsx'
-
-# Write the DataFrame to an Excel file
-df.to_excel(file_path, index=False)
-
-print("Excel file saved successfully.")
+# import pandas as pd
+#
+# # Assuming data is a list of dictionaries where each dictionary represents a row of data
+# # Example:
+# data = []
+# for gen in best_chromosome.chromosome:
+#     info = parse_gen(gen)
+#     new_row = {
+#         'f_malp': "",
+#         'f_mamh': info.subject_id,
+#         'f_tenmhvn': SUBJECT_ID_TO_NAME.get(info.subject_id, "INVALID"),
+#         'f_dvht': SUBJECT_INFO[info.subject_id]['f_dvht'],
+#         'f_ts': SUBJECT_INFO[info.subject_id]['f_ts'],
+#         'f_lt': SUBJECT_INFO[info.subject_id]['f_lt'],
+#         'f_bt': SUBJECT_INFO[info.subject_id]['f_bt'],
+#         'f_tn': SUBJECT_INFO[info.subject_id]['f_tn'],
+#         'f_btl': SUBJECT_INFO[info.subject_id]['f_btl'],
+#         'f_da': SUBJECT_INFO[info.subject_id]['f_da'],
+#         'f_la': SUBJECT_INFO[info.subject_id]['f_la'],
+#         'f_mh_mabm': None,
+#         'f_mh_tenbm': PROGRAM_ID_REVERSE.get(GROUP_ID_TO_PROGRAM_ID.get(info.group_id[:-2], "INVALID"), "INVALID"),
+#         'f_manh': info.group_id,
+#         'f_sosv': None,
+#         'f_sstb': 0,
+#         'f_succhua': ROOM_TYPE_ID_REVERSE.get(info.room_type_id, "INVALID"),
+#         'f_sosv1': None,
+#         'f_sodk': None,
+#         'f_tuan1': 0,
+#         'f_thu': {i: calendar.day_name[i] for i in range(7)}.get(info.day - 2, "INVALID"),
+#         'f_tietbd': info.session_start if NUMBER_OF_SESSION.get(info.subject_id,
+#                                                                 "INVALID") != "INVALID" and NUMBER_OF_SESSION.get(
+#             info.subject_id, "INVALID") + info.session_start in VALID_SESSION else "INVALID",
+#         'f_sotiet': NUMBER_OF_SESSION.get(info.subject_id, "INVALID"),
+#         'f_manv': None,
+#         'f_holotvn': None,
+#         'f_tenvn': None,
+#         'f_mabm': None,
+#         'f_tenbm': None,
+#         'f_tenph': None,
+#         'f_diadiem': FACILITY_ID[FACILITY[info.group_id[:-2]]],
+#         'f_mamh_lt': None,
+#         'f_makhoa': 'MT',
+#         'f_tenkhoa': 'KH & KT Máy tính',
+#         'f_manh_lt': None
+#     }
+#     for idx, bit in enumerate(info.weeks_bitstring):
+#         new_row[f"t{idx + 1}"] = 'x' if bit == '1' else None
+#     data.append(new_row)
+#
+# # Create a DataFrame from the data
+# df = pd.DataFrame(data)
+#
+# # Define the file path to save the Excel file
+# file_path = '/Users/vinhvu/Sched/TKB-241.xlsx'
+#
+# # Write the DataFrame to an Excel file
+# df.to_excel(file_path, index=False)
+#
+# print("Excel file saved successfully.")
 #
 # """# Appendix: Hyper parameters Number of room in each facility
 #
