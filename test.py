@@ -190,7 +190,7 @@ PROGRAM_ID_REVERSE = {value: key for key, value in PROGRAM_ID.items()}
 
 ROOM_TYPE_ID = {
     30.0: "1",
-    39.0: "2",
+    35.0: "2",
     40.0: "3",
     60.0: "4",
     80.0: "5",
@@ -204,12 +204,12 @@ LAB_ROOM_TYPE_ID = {
     30.1: "2",  #508-C6
     30.2: "3",  #510-C6
 
-    39.0: "4",  #202-C5
-    39.1: "5",  #105-C6
-    39.2: "6",  #102-C6
-    39.3: "7",  #103-C6
-    39.4: "8",  #509-C6
-    39.5: "9",  #303-B9
+    35.0: "4",  #202-C5
+    35.1: "5",  #105-C6
+    35.2: "6",  #102-C6
+    35.3: "7",  #103-C6
+    35.4: "8",  #509-C6
+    35.5: "9",  #303-B9
 
     40.1: "10",  #601-H6
     40.2: "11",  #603-H6
@@ -311,7 +311,7 @@ PROGRAM_ID_TO_GROUP_ID = {
 
 GROUP_ID_TO_PROGRAM_ID = {val: key for key, val in PROGRAM_ID_TO_GROUP_ID.items()}
 
-VALID_DAY = range(2, 7)  # active day of university, except Saturday and Sunday
+VALID_DAY = range(2, 9)  # active day of university, except Saturday and Sunday
 VALID_SESSION_START = range(2, 12)  # active session start, 11 mean 16h, I think the shortest class must be in 2 hours
 VALID_ROOM_TYPE_ID = [str(r) for r in range(1, 9)]
 VALID_SESSION = range(2, 14)
@@ -412,7 +412,7 @@ df0.merge(df3, on='subject_id').groupby(['num_session'])['num_of_group'].sum()
 df4 = preprocess_raw_data(data4, SHEET_NAMES[1])
 df4
 
-# df0.to_csv('/Users/vinhvu/Sched/df0_preprocessed.csv', index=False)
+df0.to_csv('/Users/twang/Documents/GitHub/Sched/df0_new.csv', index=False)
 # df3.to_csv('/Users/vinhvu/Sched/df3_preprocessed.csv', index=False)
 # df4.to_csv('/Users/vinhvu/Sched/df4_preprocessed.csv', index=False)
 # ref_df.to_csv('/Users/vinhvu/Sched/refdf_preprocessed.csv', index=False)
@@ -962,7 +962,9 @@ class InvalidDayConstraint(ConstraintBase):
     def __call__(self, chromosome):
         for idx, gen in enumerate(chromosome.chromosome):
             info = parse_gen(gen)
-            if info.day not in VALID_DAY:
+            if "tn" in SUBJECT_ID_TO_NAME.get(info.subject_id, "").lower() and info.day not in range(2,9):
+                self._logging['invalid_day_cases'] += 1
+            elif info.day not in range(2,7):
                 self._logging['invalid_day_cases'] += 1
                 ConstraintBase.InvalidIndices.append(idx)
         return self._logging
@@ -992,6 +994,8 @@ class InvalidSessionConstraint(ConstraintBase):
                 self._logging['invalid_start_session'] += 1
             elif info.session_start + duration not in VALID_SESSION:
                 self._logging['invalid_end_session'] += 1
+            elif "tn" in SUBJECT_ID_TO_NAME.get(info.subject_id, "").lower() and info.session_start > 8 :
+                    self._logging['invalid_lab_session'] += 5
             else:  # no case error, minus 1
                 self._logging['total_invalid_session_cases'] -= 1
                 ConstraintBase.InvalidIndices = ConstraintBase.InvalidIndices[:-1]
@@ -1028,7 +1032,25 @@ class InvalidRoomTypeIdConstraint(ConstraintBase):
 
 
 """### Room Constraints"""
+class LabRoomStartConstraint(ConstraintBase):
+    def __init__(self):
+        super().__init__("Lab Session Start Constraint", ConstraintTypeHard())
+        self.active = True
+        self._logging = defaultdict(int)
+        self.vars_depend = "lab_session"
+        self.penalty = 500
 
+    def __call__(self, chromosome):
+        for idx, gen in enumerate(chromosome.chromosome):
+            info = parse_gen(gen)
+            if "tn" in SUBJECT_ID_TO_NAME.get(info.subject_id, "").lower() and info.session_start not in range(2,9):
+                self._logging['invalid_lab_session_start'] +=1
+                # print(f"Invalid Lab Session Start: {info.subject_id} , session start: {info.session_start}")
+        return self._logging
+
+    @property
+    def fitness(self):
+        return sum(self._logging.values()) * self.penalty
 
 class SmallerRoomConstraint(ConstraintBase):
     def __init__(self):
@@ -1285,15 +1307,16 @@ lab_room_cc_cn = {
 }
 
 lab_room_l = {
+    "708-H6": ["CO3094"],
     "701-H6": ["CO2014", "CO2004", "CO2018", "CO1006"],
     "702-H6": ["CO2014", "CO2004", "CO2018", "CO1006"],
-    "703-H6": ["CO2014", "CO2004", "CO2018", "CO1006"],
+    "703-H6": ["CO2014", "CO2004", "CO2018", "CO1006","CO3094"],
     "707-H6": ["CO2014", "CO2004", "CO2018", "CO1006"],
-    "603-H6": ["CO2014", "CO2004", "CO2018", "CO1006"],
+    "603-H6": ["CO2014", "CO2004", "CO2018", "CO1006","CO3094"],
     "604-H6": ["CO2014", "CO2004", "CO2018", "CO1006"],
     "601-H6": ["CO2008", "CO3054", "CO3010", "CO1024", "CO2038"],
     "605-H6": ["CO1024", "CO2038"],
-    "708-H6": ["CO3094"],
+
 }
 
 class LabRoomConstraint(ConstraintBase):
@@ -1319,14 +1342,15 @@ class LabRoomConstraint(ConstraintBase):
             info = parse_gen(gen)
             if "tn" in SUBJECT_ID_TO_NAME.get(info.subject_id, "").lower():
                 group_type = info.group_id[:2]  # Giả sử "CC" hoặc "CN" hoặc "L" nằm ở đầu
-                day_sessions[group_type][info.day][info.session_start].append(info.subject_id)
+                day_sessions[group_type][info.day][info.session_start].append((info.subject_id, info.room_type_id))
 
         for group_type, days in day_sessions.items():
             for day, sessions in days.items():
                 for session_start, subjects in sessions.items():
                     if group_type in ["CC", "CN"]:
                         self.check_lab_rooms(subjects, self.lab_room_dict_cc_cn, group_type, day, session_start)
-                    elif group_type == "L":
+                    elif group_type == "L0" or group_type == "L1":
+                        print(group_type)
                         self.check_lab_rooms(subjects, self.lab_room_dict_l, group_type, day, session_start)
                     else:
                         # Handle other group types if necessary
@@ -1335,17 +1359,22 @@ class LabRoomConstraint(ConstraintBase):
         return self._logging
 
     def check_lab_rooms(self, subjects, lab_room_dict, group_type, day, session_start):
-        rooms_used = defaultdict(int)
-        for subject in subjects:
+        rooms_used = defaultdict(list)  # Lưu danh sách các session_start cho mỗi phòng
+        for subject, room_type_id in subjects:
             if subject in lab_room_dict:
                 for room in lab_room_dict[subject]:
-                    rooms_used[room] += 1
+                    rooms_used[room].append(session_start)
 
-        for room, count in rooms_used.items():
-            if count > 1:
-                self._logging[f'invalid_lab_room_group_{group_type}_day_{day}_session_{session_start}'] += 1
-                # Ghi nhật ký chi tiết
-                print(f"Violation found: {group_type} on day {day} at session {session_start} in room {room} with count {count}")
+        for room, sessions in rooms_used.items():
+            sessions.sort()  # Sắp xếp các session_start
+            for i in range(len(sessions) - 1):
+                if sessions[i + 1] - sessions[i] < 5:
+                    self._logging[f'invalid_lab_room_group_{group_type}_day_{day}_room_{room}'] += 1
+                    # Ghi nhật ký chi tiết
+                    print(f"Violation found: {group_type} on day {day} in room {room} with sessions {sessions[i]} and {sessions[i + 1]}")
+            # Kiểm tra số lượng lớp trong mỗi phòng
+            if len(sessions) > 1:
+                self._logging[f'overload_lab_room_group_{group_type}_day_{day}_room_{room}'] += (len(sessions) - 1)
 
     @property
     def fitness(self):
@@ -1578,7 +1607,7 @@ def train_ga_with_strategies(data0, data1, num_generations=100, population_size=
 # Call the train_ga_with_strategies function with appropriate parameters
 best_chromosome, global_logging = train_ga_with_strategies(
     df0, df3,
-    num_generations=100,  # Tăng số thế hệ
+    num_generations=300,  # Tăng số thế hệ
     population_size=150,  # Tăng kích thước quần thể
     elitism_size=20,  # Tăng kích thước elitism
     mating_rate=0.8,  # Tăng tỉ lệ phối giống
@@ -1712,7 +1741,7 @@ for gen in merge_with_fixed_chromosome_and231(best_chromosome).chromosome:
 df = pd.DataFrame(data)
 
 # Update room assignment from row 211 onwards
-start_index = 211
+start_index = 220
 df = update_room_assignment(df, start_index)
 
 k = len(fixed_chromosome.chromosome)
